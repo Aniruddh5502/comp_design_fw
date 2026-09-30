@@ -1,0 +1,35 @@
+{
+  "project_name": "MEMS Structural Optimization",
+  "parameters": {
+    "thickness": {
+      "min": 0.1,
+      "max": 2.0,
+      "unit": "mm",
+      "description": "Thickness of the structural membrane"
+    },
+    "width": {
+      "min": 10.0,
+      "max": 50.0,
+      "unit": "mm",
+      "description": "Width of the support beams"
+    },
+    "length": {
+      "min": 100.0,
+      "max": 500.0,
+      "unit": "mm",
+      "description": "Total length of the device"
+    }
+  },
+  "objectives": [
+    {
+      "name": "max_stress",
+      "target": "minimize",
+      "unit": "MPa"
+    },
+    {
+      "name": "first_eigenfrequency",
+      "target": "maximize",
+      "unit": "Hz"
+    }
+  ]
+}

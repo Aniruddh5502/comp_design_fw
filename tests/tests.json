@@ -1,0 +1,95 @@
+{
+  "time": "2026-09-30 21:24:11",
+  "execution_details": [
+    {
+      "test_file": "test_foundation.py",
+      "test_name": "Foundation Verification",
+      "test_report": [
+        {
+          "task_name": "Config and Design space loading",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Pipeline state update",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Logger initialization",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        }
+      ]
+    },
+    {
+      "test_file": "test_ansys.py",
+      "test_name": "Test Ansys",
+      "test_report": [
+        {
+          "task_name": "Ansys_Launch_Test",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "File check",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Script Running Test",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        }
+      ]
+    },
+    {
+      "test_file": "test_config.py",
+      "test_name": "Config Manager Verification",
+      "test_report": [
+        {
+          "task_name": "Read existing file",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Set and Save",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Update file direct",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Global config access",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Load different file",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        },
+        {
+          "task_name": "Create new file",
+          "status": true,
+          "error_type": null,
+          "error_message": null
+        }
+      ]
+    }
+  ]
+}

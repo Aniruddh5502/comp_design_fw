@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / lock files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Project Specific
+*.wbpj
+*.wbpj.backup
+data/ansys_projects/
+example_settings.json
+tests/test_config_temp.json
+tests/new_config_temp.json

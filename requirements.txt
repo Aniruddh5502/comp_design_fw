@@ -1,0 +1,7 @@
+# Something something
+rich
+ansys-workbench-core
+pandas
+numpy
+ansys-tools-path
+pymechanical

@@ -1,0 +1,49 @@
+{
+    "pipeline_state": {
+        "data_generation": "in_progress",
+        "simulations": "pending",
+        "model_training": "pending",
+        "optimization": "pending",
+        "last_updated": "2026-09-28T00:00:00"
+    },
+    "data_gen": {
+        "sampling_method": "LHS",
+        "sample_count": 1000,
+        "overwrite_raw": true,
+        "seed": 42
+    },
+    "simulation": {
+        "server_port": 10000,
+        "ansys_template_path": "data/ansys_projects/template.wbpj",
+        "resume_simulations": true,
+        "max_parallel_instances": 1,
+        "timeout_seconds": 3600,
+        "verify_every_n_runs": 10,
+        "log_level": "INFO"
+    },
+    "model_training": {
+        "ensemble_size": 20,
+        "architecture": {
+            "hidden_layers": [
+                64,
+                64
+            ],
+            "activation": "relu"
+        },
+        "hyperparameters": {
+            "learning_rate": 0.001,
+            "epochs": 500,
+            "batch_size": 32,
+            "optimizer": "Adam"
+        },
+        "validation_split": 0.2,
+        "device": "cuda"
+    },
+    "system": {
+        "project_root": ".",
+        "output_format": "csv",
+        "save_intermediate_checkpoints": true
+    },
+    "ansys_server_port": 50383,
+    "last_run": "2023-10-27"
+}
