@@ -20,3 +20,5 @@ Thumbs.db
 
 # Project Specific
 logs/
+backup_file_files/
+parametric_file_files/
