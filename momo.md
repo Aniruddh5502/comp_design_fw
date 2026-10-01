@@ -23,8 +23,8 @@ comp_design_fw/
 │   ├── analysis/           # Optimization (NSGA-II), Manifold (UMAP), Sensitivity (Jacobian)
 │   └── utils/              # Config loader, Logger, File system handlers
 ├── scripts/                # Execution Layer (CLI Tools)
-│   ├── 01_generate_data.py # Param grid generation
-│   ├── 02_run_simulations.py# ANSYS execution loop (with Resume capability)
+│   ├── 01_generate_data.py # Param grid generation (with State Awareness)
+│   ├── 02_run_simulations.py# ANSYS execution loop (with Resume & Checkpointing)
 │   ├── 03_train_model.py    # Ensemble training pipeline
 │   └── 04_run_optimization.py# Design optimization execution
 ├── tests/                  # Pytest suite for verification
@@ -41,12 +41,14 @@ comp_design_fw/
 `Config (JSON)` $\rightarrow$ `Data Generation` $\rightarrow$ `ANSYS Sweep (Ground Truth)` $\rightarrow$ `Data Processing` $\rightarrow$ `ML Model Training` $\rightarrow$ `Design Optimization` $\rightarrow$ `Verification`.
 
 ### Key Features
-1. **Resume Capability**: The simulation runner checks `data/processed/` for existing entries. If a parameter set has a recorded result, it is skipped.
-2. **Relative Pathing**: All paths are relative to the project root to ensure "one-click" portability across different machines.
-3. **Dual-Mode Demo**:
-    * **Production Mode**: Full pipeline execution for research.
-    * **Verification Mode**: Targeted $N$-sample runs to verify the PyAnsys setup and ML-vs-ANSYS accuracy.
-4. **Config-Driven**: No hard-coded parameters. Everything is controlled via `config.json` and `design_space.json`.
+1. **State-Aware Data Generation**: `01_generate_data.py` prompts user to [Skip] or [Regenerate] if `design_points.csv` exists.
+2. **Robust Simulation Resume**: `02_run_simulations.py` calculates missing `Design_IDs` and prompts to resume only the remaining simulations.
+3. **Atomic Checkpointing**: Results are appended to `simulation_results.csv` immediately after every successful run to ensure zero data loss.
+4. **Relative Pathing**: All paths are relative to the project root for "one-click" portability.
+5. **Dual-Mode Demo**:
+    * **Production Mode**: Full pipeline execution.
+    * **Verification Mode**: Targeted $N$-sample runs to verify ML-vs-ANSYS accuracy.
+6. **Config-Driven**: No hard-coded parameters. All controlled via `config.json` and `design_space.json`.
 
 ---
 
@@ -56,18 +58,18 @@ comp_design_fw/
 - [x] Setup directory structure.
 - [x] Create `config.json` and `design_space.json` templates.
 - [x] Implement `src.utils.config_loader` and `src.utils.logger`.
-    - *Note: Verified via automated tests. `ConfigLoader` resolves project root automatically. `logger` uses `setup_logger()`.*
 
-### Phase 2: Simulation Engine
-- [ ] Refactor `ansys_runner.py` $\rightarrow$ `src/simulation/runner.py`.
-- [ ] Refactor `sweep.py` $\rightarrow$ `src/simulation/sweep.py` (Add Resume logic).
-- [ ] Implement `scripts/01_generate_data.py` (Grid & LHS).
-- [ ] Implement `scripts/02_run_simulations.py`.
+### Phase 2: Simulation Engine (Clean Rewrite)
+- [x] Implement `src.simulation.sampling` (Grid & LHS).
+- [ ] Implement `scripts/01_generate_data.py` (State-aware generation).
+- [ ] Implement `src.simulation.runner` (PyAnsys interface).
+- [ ] Implement `src.simulation.sweep` (Resume logic & atomic checkpointing).
+- [ ] Implement `scripts/02_run_simulations.py` (CLI entry point).
 
 ### Phase 3: ML & Analysis Core
-- [ ] Refactor `model_build.py` $\rightarrow$ `src/core/trainer.py`.
-- [ ] Refactor `predict.py` $\rightarrow$ `src/core/predictor.py`.
-- [ ] Refactor `optimization.py` $\rightarrow$ `src/analysis/optimization.py`.
+- [ ] Implement `src.core.trainer.py` (Ensemble MLP).
+- [ ] Implement `src.core.predictor.py` (Inference engine).
+- [ ] Implement `src.analysis.optimization.py` (NSGA-II).
 - [ ] Implement `scripts/03_train_model.py` and `scripts/04_run_optimization.py`.
 
 ### Phase 4: Demo & Verification
@@ -76,18 +78,31 @@ comp_design_fw/
 - [ ] Migrate verification tests to `tests/` using `pytest`.
 - [ ] Finalize `README.md` and installation scripts.
 
-# Tests writing
+# Test Architecture Specification
 
-first read 
-tests/test_foundation.py
-tests/test_response.py
-to understand test writing structure 
+The project uses a custom verification framework instead of raw pytest for structured reporting.
+
+### 1. Test Structure
+Every test file must follow this pattern:
+- **Imports**: Import `TestResponse`, `TestResponses`, `create_test_response`, and `create_test_responses` from `tests.tests_response`.
+- **Path Setup**: Add project root to `sys.path` to allow `src` imports.
+- **The Suite Function**: A single function (e.g., `test_sampling()`) that:
+    - Initializes a `tests_report: List[TestResponse] = []`.
+    - Wraps each individual test case in a `try-except` block.
+    - On Success: Appends `create_test_response(status=True, ...)`.
+    - On Failure: Appends `create_test_response(status=False, error_type="...", error_message=f"ERROR: {e}")`.
+- **Execution**: Returns `create_test_responses(...)`.
+- **Main Block**: Uses `rich.console` to print the resulting JSON for readability.
+
+### 2. Verification Flow
+- Tests are executed as scripts: `python tests/test_module.py`.
+- Pass/Fail is determined by the `status` boolean in the `test_report` list.
 
 # Tools and hacks
 
 ## Lessons Learned (Momobot)
-- **API Verification**: Never assume a function name (e.g., `get_logger` vs `setup_logger`). Always `read` the source before writing tests.
-- **Constructor Logic**: Verify whether a class expects a file path or a root directory to avoid `FileNotFoundError` caused by path doubling (e.g., `ConfigLoader` expects project root, not the config file path).
+- **API Verification**: Never assume a function name. Always `read` the source before writing tests.
+- **Constructor Logic**: Verify whether a class expects a file path or a root directory to avoid `FileNotFoundError`.
 
 ## Powershell command to clear the __pycache__/
 

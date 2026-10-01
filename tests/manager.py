@@ -27,7 +27,8 @@ def run_tests():
     test_suites = [
         ("tests.test_foundation",   "test_foundation"),
         ("tests.test_ansys",        "test_ansys"),
-        ("tests.test_config",       "test_config_manager")
+        ("tests.test_config",       "test_config_manager"),
+        ("tests.test_sampling",     "test_sampling"),
 
         # ("module.file_name", "function_name")
         # Add future tests here:
@@ -56,7 +57,7 @@ def run_tests():
         except Exception as e:
             
             anim.stop()
-            console.print(f"{theme_char} Module     :   {module_path:<10} Running [red][Failed][/red]")
+            console.print(f"{theme_char} Module     :   {module_path:<30} Running [red][Failed][/red]")
                         
             all_responses.append({
                 "test_file": module_path,

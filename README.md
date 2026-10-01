@@ -13,7 +13,7 @@ comp_design_fw/
 ├── models/           # Trained surrogate model artifacts
 ├── plots/            # Generated analysis and optimization plots
 ├── src/              # Core engine (Simulation, ML, Analysis, Utils)
-├── scripts/          # CLI entry points for the pipeline (01_gen $\rightarrow$ 04_opt)
+├── scripts/          # CLI entry points for the pipeline (01_gen -> 04_opt)
 ├── tests/            # Verification suite
 └── demo/             # Interactive demo assets
 ```
@@ -32,14 +32,27 @@ Edit the following files in `config/` to match your local ANSYS environment and 
 
 ### 3. Execution Pipeline
 Run the scripts in sequence to build the project:
-1. **Generate Data**: `python scripts/01_generate_data.py`
-2. **Run Simulations**: `python scripts/02_run_simulations.py` (Supports resume)
-3. **Train Model**: `python scripts/03_train_model.py`
-4. **Optimize Design**: `python scripts/04_run_optimization.py`
+
+1. **Generate Data** (`python scripts/01_generate_data.py`):
+   - Generates sampling grids (Grid or Latin Hypercube) based on `design_space.json`.
+   - **State Awareness**: Prompts user to [Skip] or [Regenerate] if `design_points.csv` already exists.
+
+2. **Run Simulations** (`python scripts/02_run_simulations.py`):
+   - Executes PyAnsys simulations for the generated design points.
+   - **State Awareness**: Implements robust **Resume Logic**. Checks for existing results and prompts to simulate only the missing `Design_IDs`.
+   - **Checkpointing**: Results are appended to `simulation_results.csv` after every single successful run to prevent data loss.
+
+3. **Train Model** (`python scripts/03_train_model.py`):
+   - Trains an Ensemble MLP surrogate model using the simulation results.
+   - Saves the trained model and scalers to `models/`.
+
+4. **Optimize Design** (`python scripts/04_run_optimization.py`):
+   - Performs multi-objective optimization (e.g., NSGA-II) using the surrogate model.
+   - Generates Pareto fronts and identifies optimal design candidates.
 
 ## Demo Modes
 The framework supports two primary usage patterns:
-- **Production Mode**: Full sweep $\rightarrow$ Full Train $\rightarrow$ Optimization.
+- **Production Mode**: Full sweep -> Full Train -> Optimization.
 - **Verification Mode**: Run a small subset of simulations to compare ML predictions against ANSYS results side-by-side.
 
 ---

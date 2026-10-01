@@ -44,6 +44,6 @@
         "output_format": "csv",
         "save_intermediate_checkpoints": true
     },
-    "ansys_server_port": 50383,
+    "ansys_server_port": 50087,
     "last_run": "2023-10-27"
 }

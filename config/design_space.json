@@ -18,6 +18,12 @@
       "max": 500.0,
       "unit": "mm",
       "description": "Total length of the device"
+    },
+    "height": {
+      "min":10.0,
+      "max":20.0,
+      "unit":"mm",
+      "description":"Height of the sample geometry"
     }
   },
   "objectives": [
