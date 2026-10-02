@@ -5,6 +5,14 @@ from rich.console import Console
 
 console = Console()
 
+theme_char      =   "✽"
+book_cloth      =   "#CC785C"
+error           =   "#BF4D43"
+focus           =   "#61AAF2"
+white           =   "#FFFFFF"
+black           =   "#000000"
+cloud_light     =   "#BFBFBA"
+
 class ConfigManager:
     """
     Manages configuration variables from JSON files.

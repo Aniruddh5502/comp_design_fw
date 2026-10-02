@@ -8,7 +8,8 @@
     },
     "data_gen": {
         "sampling_method": "LHS",
-        "sample_count": 1000,
+        "sample_count": 2000,
+        "division": 6,
         "overwrite_raw": true,
         "seed": 42
     },

@@ -1,26 +1,26 @@
 {
   "project_name": "MEMS Structural Optimization",
-  "parameters": {
-    "thickness": {
+  "input_parameters": {
+    "beam_width": {
       "min": 0.1,
       "max": 2.0,
       "unit": "mm",
-      "description": "Thickness of the structural membrane"
+      "description": "Width of flexure beam"
     },
-    "width": {
+    "beam_length": {
       "min": 10.0,
       "max": 50.0,
       "unit": "mm",
-      "description": "Width of the support beams"
+      "description": "Length of the flexures"
     },
-    "length": {
-      "min": 100.0,
-      "max": 500.0,
+    "fillet_radius": {
+      "min": 0.1,
+      "max": 2,
       "unit": "mm",
-      "description": "Total length of the device"
+      "description": "Radius of the flexure fillets"
     },
-    "height": {
-      "min":10.0,
+    "beam_height": {
+      "min":5.0,
       "max":20.0,
       "unit":"mm",
       "description":"Height of the sample geometry"

@@ -14,7 +14,7 @@ class Sampler:
         Args:
             design_space: The 'parameters' dictionary from design_space.json
         """
-        self.params = design_space['parameters']
+        self.params = design_space.get('input_parameters', design_space.get('parameters'))
         self.param_names = list(self.params.keys())
         self.bounds = np.array([[p['min'], p['max']] for p in self.params.values()])
 
