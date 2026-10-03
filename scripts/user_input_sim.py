@@ -2,12 +2,13 @@ import json
 import os, sys
 import pandas as pd
 import numpy as np
-
+import time
 from pathlib                    import Path
 from typing                     import TypedDict, Literal
 from rich.console               import Console
 from rich.pretty                import Pretty
 from rich.markdown              import Markdown
+from rich.progress              import Progress
 from src.simulation.sampling    import Sampler
 from src.utils.logger           import logger
 from config.config              import theme_char, focus, error, book_cloth
@@ -30,6 +31,29 @@ design_space_config_path    =   Path(__file__).parent.parent / "config" / "desig
 design_space_config         =   ConfigManager(default_file=design_space_config_path)
 sampling_config_path        =   Path(__file__).parent.parent / "config" / "config.json"
 config                      =   ConfigManager(default_file=sampling_config_path)
+
+def mock_ansys_run(design_id: int, params: dict) -> dict:
+    """
+    Mocks an Ansys simulation run.
+    In reality, this would write a .py or .wbjn script, call Ansys, and read results.
+    """
+    # Simulate computation time
+    time.sleep(0.1) 
+    
+    # Generate deterministic-ish random values based on params to simulate physics
+    # We use sum of params as a seed for the specific design
+    seed = int(np.sum(list(params.values())) * 100) if params else 42
+    np.random.seed(seed)
+    
+    return {
+        "max_stress_von_mises": np.random.uniform(100, 500),
+        "max_deflection": np.random.uniform(0.01, 0.5),
+        "modal_freq_1": np.random.uniform(10, 100),
+        "modal_freq_2": np.random.uniform(100, 500),
+        "modal_freq_3": np.random.uniform(500, 1000),
+        "modal_freq_4": np.random.uniform(1000, 2000),
+        "status": "completed"
+    }
 
 def get_user_input()->dict:
     # 1. Sampling Method

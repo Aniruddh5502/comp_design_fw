@@ -41,14 +41,30 @@ comp_design_fw/
 `Config (JSON)` $\rightarrow$ `Data Generation` $\rightarrow$ `ANSYS Sweep (Ground Truth)` $\rightarrow$ `Data Processing` $\rightarrow$ `ML Model Training` $\rightarrow$ `Design Optimization` $\rightarrow$ `Verification`.
 
 ### Key Features
-1. **State-Aware Data Generation**: `01_generate_data.py` prompts user to [Skip] or [Regenerate] if `design_points.csv` exists.
-2. **Robust Simulation Resume**: `02_run_simulations.py` calculates missing `Design_IDs` and prompts to resume only the remaining simulations.
-3. **Atomic Checkpointing**: Results are appended to `simulation_results.csv` immediately after every successful run to ensure zero data loss.
+1. **State-Aware Data Generation**: `scripts/user_input_sim.py` prompts user for sampling method and handles resumable input generation.
+2. **Robust Simulation Resume**: `02_run_simulations.py` (Pending) will calculate missing `Design_IDs` using the `status` column (`pending` vs `done`) and prompt to resume only the remaining simulations.
+3. **Atomic Checkpointing**: Results are appended to `inputs.csv` immediately after every successful run to ensure zero data loss.
 4. **Relative Pathing**: All paths are relative to the project root for "one-click" portability.
 5. **Dual-Mode Demo**:
     * **Production Mode**: Full pipeline execution.
     * **Verification Mode**: Targeted $N$-sample runs to verify ML-vs-ANSYS accuracy.
 6. **Config-Driven**: No hard-coded parameters. All controlled via `config.json` and `design_space.json`.
+
+### Data Dictionary (Current Dataset)
+| Column | Role | Description | Status |
+| :--- | :--- | :--- | :--- |
+| `Design_ID` | Index | Unique identifier for the design point | $\checkmark$ |
+| `beam_width` | Input | Width of the beam | $\checkmark$ |
+| `beam_length` | Input | Length of the beam | $\checkmark$ |
+| `fillet_radius` | Input | Radius of the fillet | $\checkmark$ |
+| `beam_height` | Input | Height of the beam | $\checkmark$ |
+| `status` | Metadata | Tracking state: `pending` or `done` | $\checkmark$ |
+| `max_stress_von_mises` | Output | Peak Von Mises stress from Static Structural | Pending |
+| `max_deflection` | Output | Maximum nodal displacement | Pending |
+| `modal_freq_1` | Output | First natural frequency | Pending |
+| `modal_freq_2` | Output | Second natural frequency | Pending |
+| `modal_freq_3` | Output | Third natural frequency | Pending |
+| `modal_freq_4` | Output | Fourth natural frequency | Pending |
 
 ---
 
@@ -61,7 +77,7 @@ comp_design_fw/
 
 ### Phase 2: Simulation Engine (Clean Rewrite)
 - [x] Implement `src.simulation.sampling` (Grid & LHS).
-- [ ] Implement `scripts/01_generate_data.py` (State-aware generation).
+- [x] Implement `scripts/user_input_sim.py` (Interactive generation & status tracking).
 - [ ] Implement `src.simulation.runner` (PyAnsys interface).
 - [ ] Implement `src.simulation.sweep` (Resume logic & atomic checkpointing).
 - [ ] Implement `scripts/02_run_simulations.py` (CLI entry point).
