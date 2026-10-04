@@ -1,7 +1,11 @@
-# Something something
-rich
-ansys-workbench-core
-pandas
-numpy
-ansys-tools-path
-pymechanical
+# Requirements.txt
+rich>=15.0.0
+ansys-workbench-core>=0.14.0
+ansys-api-platform-instancemanagement>=1.2.0
+ansys-api-workbench>=0.4.0
+ansys-platform-instancemanagement>=1.2.0
+ansys-tools-common>=0.5.3
+ansys-tools-path>=0.8.1
+pandas>=3.0.6
+numpy>=2.5.2
+ansys-tools-path>=0.8.1

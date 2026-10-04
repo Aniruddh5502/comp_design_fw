@@ -18,17 +18,22 @@ ENV/
 Thumbs.db
 .DS_Store
 
-# Project Specific
-logs/
-backup_file_files/
+# Project Specific - Data & Artifacts (Large files/Generated content)
+data/
+models/
+plots/
 **/parametric_file_files/
-writings/
 _ProjectScratch/
 .parametric_file_files.backup/
+
+# Logging
 logs/
+**/logs/
 
-
-# Files
+# Local Documentation & Scratch
 momo.md
-test.py
-ansys_apis.md
+src/test.py
+scripts/ansys_apis.md
+
+# Notes: 
+# 'writings/' is kept in git as it contains project documentation/research.
