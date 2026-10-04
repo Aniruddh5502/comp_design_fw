@@ -11,10 +11,14 @@ from rich.markdown              import Markdown
 from rich.progress              import Progress
 from src.simulation.sampling    import Sampler
 from src.utils.logger           import logger
+from ansys.workbench.core       import workbench_client, launch_workbench
 from config.config              import theme_char, focus, error, book_cloth
+from scripts.script_datagen     import run_ansys
 
+# from scripts.script_datagen     import run_ansys
 # Use a safe character if theme_char causes encoding issues in Windows terminal
-SAFE_THEME_CHAR =  theme_char
+# We use a standard ASCII character to avoid UnicodeEncodeError on Windows cp1252 consoles
+SAFE_THEME_CHAR = theme_char
 
 console = Console()
 
@@ -72,7 +76,7 @@ def get_user_input()->dict:
             break
         elif sampling_method == '0':
             console.print(f"{SAFE_THEME_CHAR} Exiting System")
-            break
+            return
         else:
             console.print("[red]Invalid choice. Please enter 0, 1, or 2.[/]")
 
@@ -153,11 +157,11 @@ def generate_input_dataset()->dict:
     # Define output columns for simulation results
     result_cols = [
         "max_stress_von_mises",
-        "max_deflection",
-        "modal_freq_1",
-        "modal_freq_2",
-        "modal_freq_3",
-        "modal_freq_4"
+        "max_deformation",
+        "mode_1_freq",
+        "mode_2_freq",
+        "mode_3_freq",
+        "mode_4_freq"
     ]
     
     # Initialize status and results
@@ -196,6 +200,87 @@ def generate_input_dataset()->dict:
     console.print(f"{SAFE_THEME_CHAR} Pending samples: [yellow]{len(df[df['status'] == 'pending'])}[/]")
     
     return {"status": "success", "path": str(input_file)}
+
+def run_sim()->dict:
+    # 1. Path check
+    raw_dir = Path(__file__).parent.parent / "data" / "raw"
+    input_file = raw_dir / "inputs.csv"
+    
+    if not input_file.exists():
+        console.print(f"\n{SAFE_THEME_CHAR} [bold red]Input dataset not found![/]")
+        console.print(f"{SAFE_THEME_CHAR} Please run [bold green]'setup_sim'[/] first to generate the design space.")
+        return {"status": "error", "message": "No dataset found"}
+
+    # 2. Load and Filter
+    df = pd.read_csv(input_file)
+    pending_df = df[df['status'] == 'pending']
+    
+    if pending_df.empty:
+        console.print(f"\n{SAFE_THEME_CHAR} [bold green]All simulations are already complete![/]")
+        
+        # Ask for reset
+        while True:
+            choice = input(f"{SAFE_THEME_CHAR} Do you want to re-initialize the dataset and sampling settings? (y/n): ").lower()
+            if choice == 'y':
+                console.print(f"{SAFE_THEME_CHAR} [bold {error}]WARNING[/] This will overwrite your current dataset. Type [bold {focus}]'RESET'[/] to confirm: ")
+                confirm = input(f"{SAFE_THEME_CHAR} : ")
+                if confirm == "RESET":
+                    console.print(f"{SAFE_THEME_CHAR} Triggering setup workflow...")
+                    
+                    # This handles settings and dataset generation
+                    setup_sim() 
+                    
+                    console.print(f"{SAFE_THEME_CHAR} [green]Dataset re-initialized. You can now run 'run_sim' again.[/]")
+                    
+                    return {"status": "reset"}
+                else:
+                    console.print(f"{SAFE_THEME_CHAR} Confirmation failed. Reset aborted.")
+                    break
+            elif choice == 'n':
+                break
+        return {"status": "complete"}
+
+
+    
+    # 3. Execution Loop
+    total_pending = len(pending_df)
+    console.print(f"\n{SAFE_THEME_CHAR} Found [bold yellow]{total_pending}[/] pending simulations. Starting execution...\n")
+    
+    # Creating workbench instance and opening the file and passing the workbench instance
+    workbench       = launch_workbench()
+    project_file    = Path(__file__).parent.parent / "data" / "ansys_projects" / "parametric_file.wbpj"
+    path_str        = project_file.as_posix()
+    try:
+        workbench.run_script_string(f"""Open(FilePath="{path_str}")""")
+        console.print(f"{theme_char} File found and opened \n{path_str}")
+    except Exception as e:
+        console.print(f"{theme_char} [red]ERROR[/]: {e}")
+        
+
+    with Progress() as progress:
+        task = progress.add_task("[cyan]Running Simulations...", total=total_pending)
+        
+        for index, row in pending_df.iterrows():
+            # Extract parameters for this design (everything except status and result cols)
+            result_cols = ["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq", "status", "Design_ID"]
+            params = row[~row.index.isin(result_cols)].to_dict()
+
+            # results = mock_ansys_run(int(row['Design_ID']), params)
+            results = run_ansys(workbench=workbench, design_id=int(row['Design_ID']), params=params)
+            
+            # Update the main dataframe at the specific index
+            for key, value in results.items():
+                df.at[index, key] = value
+            
+            df.at[index, 'status'] = 'completed'
+            
+            # ATOMIC SAVE: Save the whole CSV after every design to ensure resumability
+            df.to_csv(input_file, index=False)
+            
+            progress.update(task, advance=1)
+            
+    console.print(f"\n{SAFE_THEME_CHAR} [bold green]Simulations complete![/]\n")
+    return {"status": "success"}
 
 def setup_sim()->dict:
     get_user_input()

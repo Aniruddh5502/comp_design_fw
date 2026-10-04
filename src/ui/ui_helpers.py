@@ -1,7 +1,8 @@
 import sys
 from rich.console import Console
 from rich.markdown import Markdown
-from scripts.user_input_sim import setup_sim
+from scripts.user_input_sim import setup_sim, run_sim
+from scripts.map_parameters import map_parameters
 
 con = Console()
 
@@ -13,11 +14,7 @@ def parse_user_input(user_input:str)->dict:
         setup_sim()
     
     elif user_input == "run_sim":
-        con.print("This one is a demo right now")
-        con.print("This command should run/resume the simulations")
-        input_ = input("> Enter 'k' to go back : ")
-        if input_ == "k":
-            pass
+        run_sim()
     else:
         con.print(f"[dim]Input is Case sensitive. \nYou might have entered something wrong[/]")
         

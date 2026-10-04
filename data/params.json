@@ -1,0 +1,52 @@
+{
+  "beam_width": {
+    "expression": "0.9 [mm]",
+    "name": "P1",
+    "value": "0.9 [mm]"
+  },
+  "mode_3_freq": {
+    "expression": null,
+    "name": "P10",
+    "value": "191.19066174139559 [Hz]"
+  },
+  "beam_length": {
+    "expression": "30 [mm]",
+    "name": "P2",
+    "value": "30 [mm]"
+  },
+  "max_deformation": {
+    "expression": null,
+    "name": "P7",
+    "value": "0.35926526737182746 [mm]"
+  },
+  "mode_4_freq": {
+    "expression": null,
+    "name": "P11",
+    "value": "269.54239468962163 [Hz]"
+  },
+  "mode_1_freq": {
+    "expression": null,
+    "name": "P8",
+    "value": "87.9879033482363 [Hz]"
+  },
+  "max_stress_von_mises": {
+    "expression": null,
+    "name": "P6",
+    "value": "1.6075760352579682 [MPa]"
+  },
+  "fillet_radius": {
+    "expression": "1 [mm]",
+    "name": "P4",
+    "value": "1 [mm]"
+  },
+  "mode_2_freq": {
+    "expression": null,
+    "name": "P9",
+    "value": "131.08742002336231 [Hz]"
+  },
+  "beam_height": {
+    "expression": "10 [mm]",
+    "name": "P3",
+    "value": "10 [mm]"
+  }
+}

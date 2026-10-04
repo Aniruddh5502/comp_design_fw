@@ -1,0 +1,12 @@
+{
+  "beam_height": "P3",
+  "beam_length": "P2",
+  "beam_width": "P1",
+  "fillet_radius": "P4",
+  "max_deformation": "P7",
+  "max_stress_von_mises": "P6",
+  "mode_1_freq": "P8",
+  "mode_2_freq": "P9",
+  "mode_3_freq": "P10",
+  "mode_4_freq": "P11"
+}

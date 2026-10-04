@@ -2,7 +2,7 @@
   "project_name": "MEMS Structural Optimization",
   "input_parameters": {
     "beam_width": {
-      "min": 0.1,
+      "min": 0.2,
       "max": 2.0,
       "unit": "mm",
       "description": "Width of flexure beam"

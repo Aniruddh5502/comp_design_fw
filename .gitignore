@@ -21,5 +21,14 @@ Thumbs.db
 # Project Specific
 logs/
 backup_file_files/
-parametric_file_files/
+**/parametric_file_files/
 writings/
+_ProjectScratch/
+.parametric_file_files.backup/
+logs/
+
+
+# Files
+momo.md
+test.py
+ansys_apis.md

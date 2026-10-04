@@ -6,16 +6,32 @@ A professional framework for mechanical design optimization using ML surrogate m
 This framework automates the pipeline from design space definition to multi-objective optimization. It leverages **PyAnsys** for ground-truth simulations and an **Ensemble MLP** for rapid surrogate modeling, allowing researchers to find optimal designs without the computational cost of thousands of FEA runs.
 
 ## Project Structure
+### Directory Tree
 ```text
 comp_design_fw/
-├── config/           # JSON configuration for system and design space
-├── data/             # Raw grids, ANSYS project files, and processed results
-├── models/           # Trained surrogate model artifacts
-├── plots/            # Generated analysis and optimization plots
-├── src/              # Core engine (Simulation, ML, Analysis, Utils)
-├── scripts/          # CLI entry points for the pipeline (01_gen -> 04_opt)
-├── tests/            # Verification suite
-└── demo/             # Interactive demo assets
+├── config/                 # System & Design boundaries (JSON)
+│   ├── config.json         # Global paths, ML hyperparameters, Logging settings
+│   └── design_space.json    # Parameter ranges, Units, Sampling methods (Grid/LHS)
+├── data/
+│   ├── raw/                # Input parameter grids (CSV)
+│   ├── ansys_projects/     # .wbpj / .db ANSYS project files (Versioned)
+│   └── processed/          # Final FEA results datasets for training
+├── models/                 # Trained model artifacts (.pkl), Scalers
+├── plots/                  # Visualization outputs for demo/papers
+├── src/                    # Core Engine (Importable Modules)
+│   ├── main.py              # Primary Entry Point (Orchestrator)
+│   ├── simulation/         # PyAnsys integration, Sweep logic, Project management
+│   ├── core/               # ML Training, Inference, Uncertainty Estimation
+│   ├── analysis/           # Optimization (NSGA-II), Manifold (UMAP), Sensitivity (Jacobian)
+│   └── utils/              # Config loader, Logger, File system handlers
+├── scripts/                # Execution Layer (CLI Tools)
+│   └── user_input_sim.py    # Unified Simulation Workflow (Setup & Run)
+│   └── script_datagen.py     # Script runner. Takes Ansys workbench and runs the script
+├── tests/                  # Pytest suite for verification
+├── tests/                  # Pytest suite for verification
+├── demo/                   # One-click demo assets (Notebooks/Streamlit)
+├── requirements.txt        # Dependency list
+└── README.md               # Documentation
 ```
 
 ## Quick Start
