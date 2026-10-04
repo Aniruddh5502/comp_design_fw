@@ -14,6 +14,7 @@ def _to_float(value_str: str) -> float:
 def run_ansys(workbench: workbench_client, design_id: int, params: dict) -> dict:
     """
     Set input parameters, solve, and read output parameters using a dynamic mapping.
+    Returns a dictionary of results. On failure, returns a dictionary with NaNs.
     """
     # Opening the params.json file and reading the parameter names form there
     params_file = Path(__file__).parent.parent / "data" / "params.json"
@@ -24,14 +25,7 @@ def run_ansys(workbench: workbench_client, design_id: int, params: dict) -> dict
     p_bl = params_display_texts["beam_length"]["name"]
     p_bh = params_display_texts["beam_height"]["name"]
     p_fr = params_display_texts["fillet_radius"]["name"]
-    """
-    # Resolve logical names to project names (e.g., 'beam_width' -> 'P1')
-    # Input mapping
-    p_bw = mapper.get_project_name("beam_width")
-    p_bl = mapper.get_project_name("beam_length")
-    p_bh = mapper.get_project_name("beam_height")
-    p_fr = mapper.get_project_name("fillet_radius")
-    """
+    
     # Output mapping
     output_logical_names = [
         "max_stress_von_mises", 
@@ -51,7 +45,6 @@ def run_ansys(workbench: workbench_client, design_id: int, params: dict) -> dict
     fr = params["fillet_radius"]
 
     # Literal { } inside the Workbench script must be doubled as {{ }}.
-    # We use a list of names for the loop in IronPython to keep it clean.
     output_names_str = ", ".join([f"'{n}'" for n in output_project_names])
 
     script = f"""
@@ -64,7 +57,7 @@ Parameters.GetParameter(Name="{p_fr}").Expression = "{fr} [mm]"
 
 # Updating means running the solver
 Update()
-
+Save(Overwrite=True)
 output = {{}}
 
 for name in [{output_names_str}]:
@@ -75,25 +68,35 @@ for name in [{output_names_str}]:
     }}
 wb_script_result = json.dumps(output)
     """
+    
     try:
         result = workbench.run_script_string(script)
+        if result is None:
+            # This happens if the IronPython script fails to return a value
+            print(f"Simulation {design_id}: Script returned None")
+            return {name: np.nan for name in output_logical_names}
+            
+        # Handle case where result is a string (JSON)
+        if isinstance(result, str):
+            try:
+                result = json.loads(result)
+            except json.JSONDecodeError:
+                print(f"Simulation {design_id}: Failed to decode JSON result")
+                return {name: np.nan for name in output_logical_names}
     except Exception as e:
-        print(f"ERROR OCCURED:     [{e}]")
-        return None
-    
+        print(f"Simulation {design_id} ERROR OCCURED: [{e}]")
+        return {name: np.nan for name in output_logical_names}
     
     # Map the internal results back to logical names
     final_results = {}
-    all_nan = True
     for logical, project_name in zip(output_logical_names, output_project_names):
-        if project_name in result and result[project_name]["value"] != "NaN":
-            val = _to_float(result[project_name]["value"])
-            final_results[logical] = val
-            all_nan = False
-        else:
+        try:
+            if project_name in result and result[project_name]["value"] != "NaN":
+                val = _to_float(result[project_name]["value"])
+                final_results[logical] = val
+            else:
+                final_results[logical] = np.nan
+        except Exception:
             final_results[logical] = np.nan
-
-    if all_nan:
-        raise RuntimeError("Simulation failed to produce results (all outputs are NaN). Check Ansys solve status.")
 
     return final_results

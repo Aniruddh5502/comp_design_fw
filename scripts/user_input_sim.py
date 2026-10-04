@@ -68,11 +68,11 @@ def get_user_input()->dict:
         
         if sampling_method == '1':
             config["data_gen"]["sampling_method"] = "GRID"
-            console.print(f"{SAFE_THEME_CHAR} Sampling method set to [green]Grid[/]\n")
+            console.print(f"{SAFE_THEME_CHAR} Sampling method set to [green]Grid\n")
             break
         elif sampling_method == '2':
             config["data_gen"]["sampling_method"] = "LHS"
-            console.print(f"{SAFE_THEME_CHAR} Sampling method set to [green]Latin Hypercube Sampling[/]\n")
+            console.print(f"{SAFE_THEME_CHAR} Sampling method set to [green]Latin Hypercube Sampling\n")
             break
         elif sampling_method == '0':
             console.print(f"{SAFE_THEME_CHAR} Exiting System")
@@ -230,7 +230,7 @@ def run_sim()->dict:
                     # This handles settings and dataset generation
                     setup_sim() 
                     
-                    console.print(f"{SAFE_THEME_CHAR} [green]Dataset re-initialized. You can now run 'run_sim' again.[/]")
+                    console.print(f"{SAFE_THEME_CHAR} [green]Dataset re-initialized. You can run 'run_sim' again.[/]")
                     
                     return {"status": "reset"}
                 else:
@@ -251,12 +251,11 @@ def run_sim()->dict:
     project_file    = Path(__file__).parent.parent / "data" / "ansys_projects" / "parametric_file.wbpj"
     path_str        = project_file.as_posix()
     try:
-        workbench.run_script_string(f"""Open(FilePath="{path_str}")""")
+        workbench.run_script_string(f"Open(FilePath=\"{path_str}\")")
         console.print(f"{theme_char} File found and opened \n{path_str}")
     except Exception as e:
         console.print(f"{theme_char} [red]ERROR[/]: {e}")
         
-
     with Progress() as progress:
         task = progress.add_task("[cyan]Running Simulations...", total=total_pending)
         
@@ -265,17 +264,40 @@ def run_sim()->dict:
             result_cols = ["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq", "status", "Design_ID"]
             params = row[~row.index.isin(result_cols)].to_dict()
 
-            # results = mock_ansys_run(int(row['Design_ID']), params)
-            results = run_ansys(workbench=workbench, design_id=int(row['Design_ID']), params=params)
+            try:
+                # print(f"  [DEBUG] Calling run_ansys for Design {row['Design_ID']}...")
+                # run_ansys now returns a dict with NaNs on failure
+                results = run_ansys(workbench=workbench, design_id=int(row['Design_ID']), params=params)
+                
+                # print(f"  [DEBUG] Received results from run_ansys: {results}")
+                
+                if results is None:
+                    print(f"  [DEBUG] run_ansys returned None. Raising ValueError.")
+                    raise ValueError("run_ansys returned None")
+                
+                # Update the main dataframe at the specific index
+                # print(f"  [DEBUG] Updating DataFrame for Design {row['Design_ID']}...")
+                for key, value in results.items():
+                    df.at[index, key] = value
+                
+                # print(f"  [DEBUG] DataFrame updated successfully.")
+                
+            except Exception as e:
+                console.print(f"[red]Simulation {row['Design_ID']} failed: {e}[/]")
+                print(f"  [DEBUG] Exception caught: {e}. Setting results to NaN.")
+                # Ensure result columns remain NaN (already initialized as NaN)
+                # We explicitly set them to NaN just in case
+                for col in ["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq"]:
+                    df.at[index, col] = np.nan
             
-            # Update the main dataframe at the specific index
-            for key, value in results.items():
-                df.at[index, key] = value
-            
+            # Mark as completed regardless of success or failure to move to next design point
+            # print(f"  [DEBUG] Marking Design {row['Design_ID']} as 'completed'.")
             df.at[index, 'status'] = 'completed'
             
             # ATOMIC SAVE: Save the whole CSV after every design to ensure resumability
+            # print(f"  [DEBUG] Saving results to {input_file}...")
             df.to_csv(input_file, index=False)
+            # print(f"  [DEBUG] CSV save complete.")
             
             progress.update(task, advance=1)
             
@@ -291,5 +313,5 @@ def setup_sim()->dict:
 
 if __name__ == "__main__":
     # For testing purposes, we can bypass get_user_input() or run it.
-    # In production, setup_sim() handles it.
+    # In production, setup_sim() handles run_sim.
     setup_sim()
