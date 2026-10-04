@@ -7,7 +7,7 @@
         "last_updated": "2026-09-28T00:00:00"
     },
     "data_gen": {
-        "sampling_method": "GRID",
+        "sampling_method": "LHS",
         "sample_count": 2000,
         "division": 7,
         "overwrite_raw": true,
