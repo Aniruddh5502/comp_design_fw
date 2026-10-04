@@ -253,6 +253,14 @@ def run_sim()->dict:
     try:
         workbench.run_script_string(f"Open(FilePath=\"{path_str}\")")
         console.print(f"{theme_char} File found and opened \n{path_str}")
+        # Access the solve configuration and turn off distributed mode
+        config = workbench.run_script_string("""
+config = ExtAPI.Application.SolveConfigurations["My Computer"]
+sp = config.SolveProcessSettings
+sp.DistributeSolution = False
+""")
+        console.print(f"{theme_char} [green]Distributed solve disabled (SMP mode)[/]")
+    # -----------------------------------------------------
     except Exception as e:
         console.print(f"{theme_char} [red]ERROR[/]: {e}")
         
