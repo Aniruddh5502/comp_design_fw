@@ -25,6 +25,7 @@ plots/
 **/parametric_file_files/
 _ProjectScratch/
 .parametric_file_files.backup/
+writings/
 
 # Logging
 logs/
