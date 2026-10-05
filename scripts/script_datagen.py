@@ -11,6 +11,12 @@ def _to_float(value_str: str) -> float:
     """'3.29 [MPa]' -> 3.29"""
     return float(value_str.split()[0])
 
+project_path    =   Path(__file__).parent.parent / "data" / "ansys_projects" / "parametric_file.wbpj"
+lock_file       =   Path(__file__).parent.parent / "data" / "ansys_projects" / "parametric_file_files" /".lock"
+project_dir     =   Path(__file__).parent.parent / "data" / "ansys_projects" / "parametric_file_files" 
+mech_db         =   project_dir / "dp0" / "global" / "MECH" / "SYS.mechdb"
+
+
 def run_ansys(workbench: workbench_client, design_id: int, params: dict) -> dict:
     """
     Set input parameters, solve, and read output parameters using a dynamic mapping.

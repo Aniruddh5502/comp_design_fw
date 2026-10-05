@@ -18,7 +18,7 @@ The flow view
     -   Run Forward Prediction (Run normal prediction adnd validate with Ansys)
     -   Run Optimizer and Validate the selected design point with Ansys
 """
-
+# The main running function
 def run():
     while True:
         # Getting terminal size

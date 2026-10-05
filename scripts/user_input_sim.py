@@ -285,12 +285,13 @@ def run_sim()->dict:
                 # print(f"  [DEBUG] DataFrame updated successfully.")
                 
             except Exception as e:
-                console.print(f"[red]Simulation {row['Design_ID']} failed: {e}[/]")
-                print(f"  [DEBUG] Exception caught: {e}. Setting results to NaN.")
+                logger.info(f"[red]Simulation {row['Design_ID']} failed: {e}[/]")
                 # Ensure result columns remain NaN (already initialized as NaN)
                 # We explicitly set them to NaN just in case
                 for col in ["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq"]:
                     df.at[index, col] = np.nan
+                    
+                # we need to clear the .lock file before we run new sim
             
             # Mark as completed regardless of success or failure to move to next design point
             # print(f"  [DEBUG] Marking Design {row['Design_ID']} as 'completed'.")
