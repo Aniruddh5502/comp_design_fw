@@ -30,7 +30,7 @@ def run():
         global state
         state = f"""
 {"="*columns}
-[bold green]OPTIONS[/]  [dim]Enter 'exit' or 'x' or 'c' to exit[/]\\n\n{theme_char}    setup_sim
+[bold green]OPTIONS[/]  [dim]Enter 'exit' or 'x' or 'c' to exit[/]\n\n{theme_char}    setup_sim
 {theme_char}    run_sim
 {theme_char}    predict
 {theme_char}    optimization
