@@ -5,8 +5,8 @@ A professional framework for mechanical design optimization using ML surrogate m
 ## SPECS & SETTINGS
 
 ```text
-Version                    :  26R1 Student Edition
-Geometry                   :  Ansys File data.ansys_projects.parametric_file.wbpj
+Version                    :  2026R1 Student Edition
+Geometry                   :  Ansys File data/ansys_projects.parametric_file.wbpj
 Python Requirements        :  requirements.txt
 Large Deflection           :  True
 Static Structural Solver   :  Direct
@@ -87,5 +87,10 @@ The framework is designed to support two primary usage patterns:
 - **Production Mode**: Full sweep -> Full Train -> Optimization. (In development)
 - **Verification Mode**: Run a small subset of simulations to compare ML predictions against ANSYS results side-by-side. (In development)
 
+# RESEARCH
+This work studies the computational optimization work on a Macro Scale Single Axis Flexure Geometry and its performance maping using surrogate models and an comparative analysis of different architectures use and their training data requirement for ranges of accuracy.
+
+# The "SO WHAT"
+The statement is, I have applied some known methods to this specific class of geometry and did analysis on how the training dataset size effects the performance compared to surrogate models with different architectures and which one configuration should get you where. I provide you the code for repurposing under a opensource lisence and the geometry and cad files along with the simulation files form ANSYS STUDENT version for academic use. I also provide the dataset on which the models were trained on so if needed these datapoints can be used to further the work.
 ---
 *Developed by Ani (Aniruddho Biswas Badhon)*
