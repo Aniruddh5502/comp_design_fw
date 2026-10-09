@@ -92,5 +92,6 @@ This work studies the computational optimization work on a Macro Scale Single Ax
 
 # The "SO WHAT"
 The statement is, I have applied some known methods to this specific class of geometry and did analysis on how the training dataset size effects the performance compared to surrogate models with different architectures and which one configuration should get you where. I provide you the code for repurposing under a opensource lisence and the geometry and cad files along with the simulation files form ANSYS STUDENT version for academic use. I also provide the dataset on which the models were trained on so if needed these datapoints can be used to further the work.
+
 ---
 *Developed by Ani (Aniruddho Biswas Badhon)*
