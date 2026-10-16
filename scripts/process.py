@@ -36,7 +36,6 @@ class Analytics(TypedDict):
     cols: int
     columns: list[ColumnInfo]     
 
-## First read the raw data and process it.
 def clean_csv(csv_filePath: Path, save_as_filename:str)->pd.DataFrame|str:
     """It saves the dataframe in the same folder with the updated name"""
     try:
