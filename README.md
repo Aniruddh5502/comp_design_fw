@@ -1,97 +1,23 @@
-# Computational Design Framework 
+# Investigation into the Miscalibration of Epistemic Uncertainty in Structural Surrogates
 
-A professional framework for mechanical design optimization using ML surrogate models and FEA verification.
+## 1. Research Thesis
+**"Quantifying the Impact of Structural Priors on the Calibration of Epistemic Uncertainty in Macro-Scale Flexures."**
 
-## SPECS & SETTINGS
+This research investigates whether the injection of physics-informed basis functions improves the **calibration** of a surrogate model's uncertainty, independent of its predictive accuracy. We aim to prove that such priors do not merely reduce residual error, but fundamentally align the model's confidence (variance) with its actual performance (error). The core contribution is the demonstration that these priors enable a model to be "aware" of its own ignorance—specifically, that uncertainty increases when the physical assumptions of the prior are violated.
 
-```text
-Version                    :  2026R1 Student Edition
-Geometry                   :  Ansys File data/ansys_projects.parametric_file.wbpj
-Python Requirements        :  requirements.txt
-Large Deflection           :  True
-Static Structural Solver   :  Direct
-Distributed Solver         :  False
-Parameter Ranges           :  config.design_space.json
-```
+## 2. Scientific Objectives
+- **Decouple Accuracy from Calibration**: Isolate the "Trust-Gap" by comparing physics-informed models against black-box surrogates of **identical Mean Absolute Error (MAE)**.
+- **Quantify Honesty via PICP/MPIW**: Use **Prediction Interval Coverage Probability (PICP)** and **Mean Prediction Interval Width (MPIW)** to measure calibration, ensuring the model is neither overconfident nor excessively conservative.
+- **The Honesty Test (Singularity Analysis)**: Validate that the model's uncertainty $\uparrow$ as Physics Validity $\downarrow$ (e.g., in thick-beam regimes where Euler-Bernoulli theory fails).
+- **Reduce Optimization Regret**: Implement a UQ-aware optimization loop using a formal **Acquisition Function** (e.g., Expected Improvement) to minimize total compute cost (FEA calls) while maximizing optimality.
 
-## Overview
+## 3. Methodology & Rigorous Proof Path
+1. **Accuracy-Matched Baseline Death-Match**: Train a physics-informed ensemble and a black-box ensemble to the same MAE. Compare their calibration metrics to prove that physics improves honesty, not just accuracy.
+2. **Data-Efficiency Ratio**: Quantify the reduction in required training samples for the physics-informed model to reach the same calibration level as the black-box model.
+3. **The Singularity Test**: Evaluate the model in non-Eulerian regimes. A scientific "Pass" is achieved if the predicted uncertainty increases as the physical prior becomes invalid.
+4. **Regret Analysis**: Compare a standard NSGA-II against a UQ-aware optimizer, quantifying the reduction in "Regret" (distance to true global optimum) per unit of compute.
 
-This project aims to automate the simulation cycle and make input dataset generation easier with Grid/LHS sampling options. It allows users to run proposed workflows on their own machines and tweak parameters as perceived useful.
-
-## Project Structure
-
-### Directory Tree
-```text
-comp_design_fw/
-├── config/                 # System & Design boundaries
-│   ├── config.json         # Global paths, ML hyperparameters, Logging settings
-│   ├── config.py           # Configuration management logic
-│   ├── design_space.json   # Parameter ranges, Units, Sampling methods (Grid/LHS)
-│   └── parameter_map.json  # Mapping between internal and Ansys parameters
-├── data/                   # Data storage
-│   ├── raw/                # Input parameter grids (CSV)
-│   ├── ansys_projects/     # .wbpj / .db ANSYS project files (Versioned)
-│   ├── processed/          # Final FEA results datasets for training
-│   ├── backup/             # Simulation backups
-│   └── params.json         # Runtime parameter snapshots
-├── models/                 # Trained model artifacts (.pkl), Scalers
-├── plots/                  # Visualization outputs for demo/papers
-├── src/                    # Core Engine (Importable Modules)
-│   ├── main.py             # Primary Entry Point (Orchestrator)
-│   ├── simulation/         # PyAnsys integration, Sweep logic, Project management
-│   ├── core/               # ML Training, Inference (Under Development)
-│   ├── analysis/           # Optimization, Manifold, Sensitivity (Under Development)
-│   ├── ui/                 # Terminal-based User Interface helpers
-│   └── utils/              # Config loader, Logger, File system handlers
-├── scripts/                # Execution Layer (CLI Tools)
-│   ├── user_input_sim.py   # Unified Simulation Workflow (Setup & Run)
-│   ├── script_datagen.py   # Script runner for Ansys Workbench
-│   ├── map_parameters.py  # Parameter mapping utility
-│   └── ansys_apis.md       # Documentation on Ansys API usage
-├── tests/                  # Pytest suite for verification
-├── demo/                   # One-click demo assets (Notebooks/Streamlit)
-├── writings/               # Project documentation and research notes
-├── requirements.txt        # Dependency list
-└── README.md               # Documentation
-```
-
-## Quick Start
-
-### 1. Installation
-```bash
-pip install -r requirements.txt
-```
-
-### 2. Configuration
-Edit the following files in `config/` to match your local ANSYS environment and design goals:
-- `config.json`: Paths and hyperparameters.
-- `design_space.json`: Parameter bounds and sampling method.
-
-### 3. Execution Pipeline
-
-The project features a terminal-based UI to guide the simulation and training process.
-
-```bash
-# Ensure you are in the project root
-python -m src.main
-```
-
-**Current Functional Options in UI:**
-- `setup_sim`: Configure sampling methods and generate the input dataset.
-- `run_sim`: Execute the Ansys simulations and collect results.
-
-**Note**: The `predict` and `optimization` options are currently under development and are not yet functional.
-
-## Demo Modes
-The framework is designed to support two primary usage patterns:
-- **Production Mode**: Full sweep -> Full Train -> Optimization. (In development)
-- **Verification Mode**: Run a small subset of simulations to compare ML predictions against ANSYS results side-by-side. (In development)
-
-# RESEARCH
-This work studies the computational optimization work on a Macro Scale Single Axis Flexure Geometry and its performance maping using surrogate models and an comparative analysis of different architectures use and their training data requirement for ranges of accuracy.
-
-# The "SO WHAT"
-The statement is, I have applied some known methods to this specific class of geometry and did analysis on how the training dataset size effects the performance compared to surrogate models with different architectures and which one configuration should get you where. I provide you the code for repurposing under a opensource lisence and the geometry and cad files along with the simulation files form ANSYS STUDENT version for academic use. I also provide the dataset on which the models were trained on so if needed these datapoints can be used to further the work.
-
----
-*Developed by Ani (Aniruddho Biswas Badhon)*
+## 4. Red Flag Warnings (Scientific Constraints)
+- **The Accuracy Fallacy**: A reduction in MAE is not a reduction in miscalibration. We must prove the model is "more honest," not just "more accurate."
+- **The "Feature Engineering" Trap**: Basis functions must be presented as structural priors that modulate epistemic uncertainty, not just inputs to lower the loss.
+- **Metric Gaming**: To prevent "gaming" the PICP by predicting infinitely wide intervals, we will report the product of PICP and MPIW (Interval Score).
