@@ -30,3 +30,24 @@ title: [A machine learning-driven surrogate modeling approach for the structural
 Problem: Use Abaqus to generate FEA solution data for some composite materials, and taking  specific wind turbine blade as a reference and generating training data. And then training a ML model which in optimization loop achieved 15.6% weight reduction relative to the baseline factorieal design approach(This means doing Grid search using Abaqus solver and selecting the optimal one form all the simulations, not like iterative refinement or gradient desccent).
 
 Critique: The baseline choosen for this is unrealistic as there could have been used an gradient based FEA. That would have reduced their timeline.
+
+[Simplified Swarm Optimization for Surrogate-Assisted Reliability Design of Insulated-Gate Bipolar Transistor Power Modules Using an Open-Source Process Finite-Element Model](https://arxiv.org/abs/2610.07412)
+problem: worked on bipolar transistors with a surrogate that has a problem between the optimizer and the predictor.
+result:
+
+==Adressed Case==
+1. Warpage predictions hold(mean absolute error 0.5%), meaning the surrogate is reliable for that output at the optimizer-reached points
+2. Ceramic-stress predictions are optimistix by up to 26% at the design-space bounds reached by optimizers.
+Comment: "Optimistic" here means the surrogate *under-reported* the stress and thus the optimizer thought that these design points satisfies the constraints better. And therefore selects those.
+
+==Not Adressed Case==
+Optimizer exploits the predictor’s higher uncertainty in favourable zones — Not addressed
+The paper does not frame the phenomenon in terms of uncertainty exploitation. Its language is about optimistic bias, not about the optimizer preferentially sampling regions where predictive variance is high. There is no analysis of the ensemble’s predictive variance at the optimizer-reached points, no comparison of variance there versus the test set, and no discussion of an acquisition function exploiting high-uncertainty favourable zones.
+Maybe because it foes find anything worth for the constraint it has that's why.. What if there are things(favourable mean prediction from the surrogate) at the high variance design points, then does the optimizer takes advantage of that.
+
+If it does in both of the cases. Then the problem is with the surrogate. The optimizer is just doing its job. Its the surrogate that predicts favourable outputs but with increased variance and optimizer doesn't take variance into account.
+
+If assembeled in Spearman Corelation this member disafreement and mean error, then there would be 4 zone on the chart that needs to be discussed.
+
+**The Optimizer exploits the design space where the model is confidently wrong**
+
