@@ -34,7 +34,7 @@ to train a 20 Ensemble NN Surrogate.
 - **Stratified Sampling**: Select **100 candidate designs** (50 top-performing, 50 diverse Pareto).
 - Run these 100 designs through the true simulator (ANSYS).
 - **Simulation Failure Protocol**: 
-  - **Robustness Metric**: Record the failure rate as a standalone metric: $\text{Robustness} = \frac{\text{Successful Runs}}{\text{Total Opt-Selected Runs}}$.
+  - **Robustness Metric**: Record the failure rate as a standalone metric: $$\text{Robustness} = \frac{\text{Successful Runs}}{\text{Total Opt-Selected Runs}}$$.
   - **Correlation Metric**: Calculate $R_{opt}$ (Spearman) **exclusively on successful runs** to avoid rank-tie distortion caused by software crashes.
 - Calculate $R_{opt}$ and 95% confidence intervals via bootstrapping.
 - **OOD Quantification**: Compare mean **Mahalanobis Distance** (which accounts for feature covariance) of OOD vs ID points to quantify "true" distributional shift.
