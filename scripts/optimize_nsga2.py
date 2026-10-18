@@ -37,12 +37,13 @@ class SurrogateOptimizationProblem(ElementwiseProblem):
         res = self.predictor.predict(x)
         mean = np.array(res["mean_preds"])
         
-        # Indices based on scaling_bounds.json:
-        # out_0: max_stress, out_1: max_def, out_2: mode_1_freq, out_3: mode_2_freq...
-        # Actually, based on scaling_bounds: 
-        # 0: stress, 1: def, 2: f1, 3: f2, 4: f3, 5: f4
-        f1 = mean[2]
-        f2 = mean[3]
+        # Named mapping to prevent index fragility
+        # Based on scaling_bounds.json: [stress, def, f1, f2, f3, f4]
+        idx_f1 = 2
+        idx_f2 = 3
+        
+        f1 = mean[idx_f1]
+        f2 = mean[idx_f2]
         
         # Objective 1: Target f1 around 100Hz
         obj1 = abs(f1 - 100.0)
@@ -99,6 +100,7 @@ def main():
     
     for i in range(6):
         df[f'out_{i}_mean'] = [m[i] for m in all_means]
+        df[f'out_{i}_std'] = [s[i] for s in all_stds]
     
     os.makedirs('results', exist_ok=True)
     output_path = 'results/ood_candidates.csv'
