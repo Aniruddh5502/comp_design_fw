@@ -39,3 +39,4 @@ To maintain research rigor, every comparison will be measured using:
 ## 5. References
 - [Uncertainty-aware Deep Learning with SNGP (TensorFlow)](https://www.tensorflow.org/tutorials/understanding/sngp)
 - [Deep Ensembles Work, But Are They Necessary? (arXiv)](https://arxiv.org/pdf/2202.06985)
+- [Simple and Principled Uncertainty Estimation with Deterministic Deep Learning via Distance Awareness](https://arxiv.org/html/2006.10108v2)
