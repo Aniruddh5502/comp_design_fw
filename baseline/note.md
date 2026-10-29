@@ -21,3 +21,7 @@ As there are two kinds of Uncertainities in these NN Surrogate models.
         -   Numerical Error: Mesh discritixation, solver tolerancesm and convergences.
         -   Parameter(calibration) Uncertainity: Unknown or Poorly identified model constants.
 
+
+## SNGP Baselines
+
+- make a simple Neural Network and then use SNGP on it to form the base line

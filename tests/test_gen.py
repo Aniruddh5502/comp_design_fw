@@ -20,7 +20,7 @@ if res["status"] == "success":
     print(f"Columns: {df.columns.tolist()}")
     
     # Check if expected columns exist
-    expected_cols = ["Design_ID", "status", "max_stress_von_mises", "max_deflection"]
+    expected_cols = ["Design_ID", "status", "max_stress_von_mises", "max_deformation"]
     for col in expected_cols:
         if col not in df.columns:
             raise Exception(f"Missing column: {col}")
