@@ -24,3 +24,6 @@ Accross almost all programms these foundational areas can be found.
 # SNGP Study
 
 - Paper [Simple and Principled Uncertainty Estimation with Deterministic Deep Learning via Distance Awareness](https://arxiv.org/abs/2006.10108)
+
+## Review
+This paper applies the SNGP architecture to classification models. That can first map the input and 
