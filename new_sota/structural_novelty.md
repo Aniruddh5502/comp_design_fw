@@ -37,9 +37,10 @@ where $1 - \alpha$ is the user-defined confidence level (e.g., 95%).
 - **Small Width** $\to$ High factual reliability.
 - **Large Width** $\to$ Low factual reliability (Knowledge Gap).
 
-## 4. The Proposed Architecture: SNGP-Conformal Hybrid
-1. **Base Model**: SNGP-RFF (provides the point prediction $\hat{y}$ and a distance-aware non-conformity score).
-2. **Wrapper**: A Conformal Prediction layer that uses the SNGP variance to weight the "non-conformity" of new points.
+## 4. The Proposed Architecture: SNGP-Conformal Hybrid (Under Review)
+1. **Base Model**: Potential SNGP-RFF (providing point prediction $\hat{y}$ and distance-aware non-conformity score).
+   - *Note*: SNGP is predominantly validated for classification. Regression implementations exist (e.g., Lightning UQ, custom PyTorch) but lack the broad SOTA validation of its classification counterpart.
+2. **Wrapper**: A Conformal Prediction layer that uses the model's uncertainty/variance to weight the "non-conformity" of new points.
 3. **Output**: A guaranteed interval for each of the 6 outputs (4 frequencies, max stress, max deformation).
 4. **Verification**: A point is flagged as a "Hidden Failure" risk if $\text{Width}(C(x)) > \text{Threshold}$.
 

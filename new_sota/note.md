@@ -26,4 +26,16 @@ Accross almost all programms these foundational areas can be found.
 - Paper [Simple and Principled Uncertainty Estimation with Deterministic Deep Learning via Distance Awareness](https://arxiv.org/abs/2006.10108)
 
 ## Review
-This paper applies the SNGP architecture to classification models. That can first map the input and 
+This paper applies the SNGP architecture to classification models. Not regression models or continious output models. So the fundamental thing doesn't match.
+
+And there are variations of this SNGP on continious output models. Used on some other fields. But none of them has been applied on the MEMS flexure or normal flexure or accelerometer class geometry. To predict FEA results and solid mechanics Physics.
+
+So this is a new take, even if we don't modify the archtecture
+
+what if we keep 2 paths. One with Spectral Normalization that keeps the distance awareness mappings right from the inputs to the hidden layers and it ends with predicting the distance with the mean predictions.
+
+And the other one with normal NN, only predicts the mean. And we calculate MSE error on both of them. 
+
+Now if both models goes to achieve same accuracy with large enough/const training compute budget/iteration. Then what does the scaling case does different to approximate the true function.
+
+And if both of them doesn't reach the same MSE error performance then who does better and what does the spectral Normalization changes in the network beyond the ||h-h_train|| and ||x-x_train||.
