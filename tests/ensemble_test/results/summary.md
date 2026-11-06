@@ -21,12 +21,12 @@
 
 | Target | Spearman rho | Pearson r |
 |--------|------------|-----------|
-| max_stress_von_mises | 0.298150 | 0.426145 |
-| max_deformation | 0.257352 | 0.690852 |
-| mode_1_freq | 0.323943 | 0.440220 |
-| mode_2_freq | 0.381202 | 0.376171 |
-| mode_3_freq | 0.196412 | 0.343277 |
-| mode_4_freq | 0.326149 | 0.348513 |
+| max_stress_von_mises | 0.457055 | 0.525440 |
+| max_deformation | 0.356274 | 0.638384 |
+| mode_1_freq | 0.529045 | 0.549557 |
+| mode_2_freq | 0.105453 | 0.359174 |
+| mode_3_freq | 0.450723 | 0.542943 |
+| mode_4_freq | 0.365109 | 0.504617 |
 
 ## Interpretation
 - **Spearman rho (0.3-0.4)**: Moderate monotonic relationship between ensemble variance and absolute error
