@@ -81,3 +81,8 @@ Some of the old plan is already well studied, so it would not count as new.
 
 ## Heatmap of Deception
 we could collect the design points that out puted high error but low variance, and project the input 4D space on a 2D plane using UMAP and color the mean error rate in colorbar where the memebers agreed but the error was high.
+
+## Files&Folders
+src/        # Ansys simulation codes
+scripts/    # The scripts that runs the code from src/
+plots/      # Plots

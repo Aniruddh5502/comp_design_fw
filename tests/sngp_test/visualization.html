@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Reliability Tax | Analysis</title>
+    
+    <style>
+        @font-face {
+            font-family: 'Anthropic Serif Web Text';
+            src: local('Anthropic Serif Web Text'), local('serif');
+        }
+        @font-face {
+            font-family: 'Anthropic Mono Variable';
+            src: local('Anthropic Mono Variable'), local('monospace');
+        }
+
+        :root {
+            /* Skill-Compliant Palette */
+            --bg-page: #fcfcfc;
+            --text-main: rgb(0,0,0);
+            --text-muted: #888888;
+            --accent: #EE7733;
+            
+            --data-train: #88CCEE; 
+            --data-val: #CC6677;   
+            --border-soft: #CCCCCC;
+            
+            --font-serif: 'Anthropic Serif Web Text', serif;
+            --font-mono: 'Anthropic Mono Variable', monospace;
+            
+            --radius: 4px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            line-height: 1.7;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .editorial-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        header {
+            margin-bottom: 64px;
+            text-align: center;
+        }
+
+        .kicker {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .abstract {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .hero-finding {
+            margin: 80px 0;
+            padding: 48px;
+            background: #fcfcfc;
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+        }
+
+        .hero-finding h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .hero-finding p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            color: var(--text-muted);
+        }
+
+        .viz-section {
+            margin-bottom: 100px;
+        }
+
+        .viz-section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--text-main);
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        .chart-wrap {
+            background: #fcfcfc;
+            border: 1px solid var(--border-soft);
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+
+        .chart-caption {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 16px;
+            text-align: right;
+        }
+
+        .math-inline {
+            font-family: var(--font-mono);
+            background: #CCCCCC;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero-finding { padding: 24px; }
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+    <div class="editorial-container">
+        <header>
+            <span class="kicker">Doctoral Analysis: Parametric FEM Surrogates</span>
+            <h1>The Reliability Tax</h1>
+            <p class="abstract">
+                Exploring the precision-stability trade-off in Spectral Normalized Gaussian Processes (SNGP).
+            </p>
+        </header>
+
+        <section class="hero-finding">
+            <h2>The Core Finding</h2>
+            <p>
+                Our analysis identifies a structural <span class="math-inline">Reliability Tax</span>: the necessary loss in predictive precision accepted to guarantee global stability. As the Lipschitz constant <span class="math-inline">&lambda;</span> is tightened, the surrogate is prevented from overfitting local curvatures, resulting in a measurable increase in RMSE.
+            </p>
+            <div id="hero-plot" style="height: 450px;"></div>
+            <div class="chart-caption">Figure 1: The divergence of precision vs stability as λ decreases.</div>
+        </section>
+
+        <section class="viz-section">
+            <h3>Supporting Evidence</h3>
+            
+            <div class="chart-wrap">
+                <div id="corr-plot" style="height: 350px;"></div>
+                <div class="chart-caption">Figure 2: Predictive Fidelity (Spearman ρ) across constraint regimes.</div>
+            </div>
+
+            <div class="chart-wrap">
+                <div id="ratio-plot" style="height: 350px;"></div>
+                <div class="chart-caption">Figure 3: Stability Ratio (Dimensionless) indicating OOD robustness.</div>
+            </div>
+        </section>
+
+        <section class="viz-section">
+            <h3>Constraint Sensitivity</h3>
+            <div class="chart-wrap">
+                <div id="sens-plot" style="height: 350px;"></div>
+                <div class="chart-caption">Figure 4: Absolute delta in RMSE between training and validation sets.</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const data = [
+            { "lipschitz": 0.5, "mean_rmse": 0.02521809, "mean_spearman": 0.1896149879, "mean_ratio": 2.5062921047, "val_mean_rmse": 0.0177360717, "val_mean_spearman": 0.1977181367, "val_mean_ratio": 1.7630380392 },
+            { "lipschitz": 1.0, "mean_rmse": 0.0252125654, "mean_spearman": 0.2071536508, "mean_ratio": 2.4623603821, "val_mean_rmse": 0.0177571494, "val_mean_spearman": 0.2032953782, "val_mean_ratio": 1.7368440628 },
+            { "lipschitz": 2.0, "mean_rmse": 0.0091174301, "mean_spearman": 0.20567819, "mean_ratio": 0.8112314343, "val_mean_rmse": 0.0065976498, "val_mean_spearman": 0.1494834982, "val_mean_ratio": 0.589797914 },
+            { "lipschitz": 3.0, "mean_rmse": 0.0091598621, "mean_spearman": 0.1634537086, "mean_ratio": 0.713702023, "val_mean_rmse": 0.0067520528, "val_mean_spearman": 0.2096655814, "val_mean_ratio": 0.5386742949 },
+            { "lipschitz": 4.0, "mean_rmse": 0.0077874432, "mean_spearman": 0.2454914362, "mean_ratio": 0.563206017, "val_mean_rmse": 0.0061437204, "val_mean_spearman": 0.2416571713, "val_mean_ratio": 0.4585356712 },
+            { "lipschitz": 5.0, "mean_rmse": 0.0098693352, "mean_spearman": 0.2214612944, "mean_ratio": 0.6647120714, "val_mean_rmse": 0.0075043538, "val_mean_spearman": 0.2310761101, "val_mean_ratio": 0.5326018929 }
+        ];
+
+        const xValues = data.map(d => d.lipschitz);
+
+        const theme = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: {
+                family: 'Anthropic Serif Web Text, serif',
+                color: '#888888',
+                size: 14
+            },
+            hoverlabel: {
+                font: {
+                    family: 'Anthropic Mono Variable, monospace',
+                    size: 14,
+                    color: 'rgb(0,0,0)'
+                }
+            },
+            xaxis: {
+                gridcolor: '#CCCCCC',
+                zerolinecolor: '#CCCCCC',
+                tickfont: { family: 'Anthropic Mono Variable, monospace' },
+                linecolor: '#888888',
+                title: { font: { family: 'Anthropic Serif Web Text', size: 16 } }
+            },
+            yaxis: {
+                gridcolor: '#CCCCCC',
+                zerolinecolor: '#CCCCCC',
+                tickfont: { family: 'Anthropic Mono Variable, monospace' },
+                linecolor: '#888888',
+                title: { font: { family: 'Anthropic Serif Web Text', size: 16 } }
+            },
+            margin: { l: 70, r: 40, t: 40, b: 60 },
+            legend: {
+                font: { family: 'Anthropic Serif Web Text' },
+                bgcolor: 'rgba(0,0,0,0)',
+                x: 0.5, y: 1.1, xanchor: 'center', orientation: 'h'
+            }
+        };
+
+        function createPlot(id, trainKey, valKey, yTitle, isHero = false) {
+            const trainTrace = {
+                x: xValues,
+                y: data.map(d => d[trainKey]),
+                name: 'Training',
+                mode: 'lines+markers',
+                line: { color: '#88CCEE', width: 3, shape: 'linear' },
+                marker: { size: 8, color: '#88CCEE' }
+            };
+
+            const valTrace = {
+                x: xValues,
+                y: data.map(d => d[valKey]),
+                name: 'Validation',
+                mode: 'lines+markers',
+                line: { color: '#CC6677', width: 3, shape: 'linear', dash: 'dot' },
+                marker: { size: 8, color: '#CC6677' }
+            };
+
+            const layout = { ...theme };
+            layout.yaxis.title.text = yTitle;
+            layout.xaxis.title.text = 'Lipschitz Constant (λ)';
+            
+            if (isHero) {
+                layout.annotations = [{
+                    x: 0.5,
+                    y: 0.025,
+                    xref: 'x',
+                    yref: 'y',
+                    text: 'Tax Zone',
+                    showarrow: true,
+                    arrowhead: 2,
+                    ax: 0,
+                    ay: -40,
+                    font: { family: 'Anthropic Mono Variable', color: '#CC6677', size: 14 }
+                }];
+            }
+
+            Plotly.newPlot(id, [trainTrace, valTrace], layout, { responsive: true, displayModeBar: false });
+        }
+
+        createPlot('hero-plot', 'mean_rmse', 'val_mean_rmse', 'RMSE [Absolute Error]', true);
+        createPlot('corr-plot', 'mean_spearman', 'val_mean_spearman', 'Spearman Correlation [ρ]');
+        createPlot('ratio-plot', 'mean_ratio', 'val_mean_ratio', 'Stability Ratio [Dimensionless]');
+
+        const deltaRmse = data.map(d => d.mean_rmse - d.val_mean_rmse);
+        const sensitivityTrace = {
+            x: xValues,
+            y: deltaRmse,
+            name: 'RMSE Delta',
+            type: 'bar',
+            marker: { color: '#EE7733', opacity: 0.7 }
+        };
+
+        Plotly.newPlot('sens-plot', [sensitivityTrace], { 
+            ...theme, 
+            xaxis: { ...theme.xaxis, title: 'Lipschitz Constant (λ)' },
+            yaxis: { ...theme.yaxis, title: 'Δ RMSE [Absolute Error]' }
+        }, { responsive: true, displayModeBar: false });
+    </script>
+</body>
+</html>
