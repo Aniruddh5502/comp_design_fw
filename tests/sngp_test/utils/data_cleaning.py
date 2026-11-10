@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 
 def load_and_clean_data(
-    csv_path="data/inputs.csv", 
+    csv_path:Path|None=None, 
     batch_size=32, 
     train_split=0.7, 
     val_split=0.15, 
@@ -21,15 +21,14 @@ def load_and_clean_data(
     root = Path(__file__).parent.parent.parent.parent.parent
 
     # Resolve paths relative to the discovered project root
-    data_dir = root / "data" / "raw"
     scaler_dir = Path(__file__).parent.parent / "data"
     plots_dir = root / "plots"
     
-    for d in [data_dir, scaler_dir, plots_dir]:
+    for d in [scaler_dir, plots_dir]:
         d.mkdir(exist_ok=True, parents=True)
 
     # Handle csv_path: if it's relative, make it relative to root
-    full_dataset_path = data_dir / 'inputs.csv'
+    full_dataset_path = csv_path
     scaler_json_path = scaler_dir / "scaler.json"
     
     if not full_dataset_path.exists():
@@ -53,7 +52,10 @@ def load_and_clean_data(
     train_df_raw = df[:train_end]
     val_df_raw = df[train_end:val_end]
     test_df_raw = df[val_end:]
-    print(test_df_raw.shape)
+    
+    print(f"Train Data Shape    :   {train_df_raw.shape}")
+    print(f"Validation Shape    :   {val_df_raw.shape}")
+    print(f"Tests Data Shape    :   {test_df_raw.shape}")
     # 4. Scaling (Fit on Train only)
     content = {}
     for col in all_cols:

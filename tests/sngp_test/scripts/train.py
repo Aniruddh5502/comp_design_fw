@@ -1,19 +1,19 @@
 import torch
 from pathlib import Path
-from comp_design_fw.tests.sngp_test.core.model import setup_model
-from comp_design_fw.tests.sngp_test.core.trainer import SNGPTrainer
-from comp_design_fw.tests.sngp_test.utils.data_cleaning import load_and_clean_data
+from sngp_test.core.model import setup_model
+from sngp_test.core.trainer import SNGPTrainer
+from sngp_test.utils.data_cleaning import load_and_clean_data
 
 def main():
     # Config
     INPUT_DIM = 4
     OUTPUT_DIM = 6
-    EPOCHS = 3000
+    EPOCHS = 6000
     
-    root = Path(__file__).parent.parent.parent.parent.parent
+    root = Path(__file__).parent.parent.parent.parent
     data_folder = root / "data"
     data_csv_raw_file = data_folder / "raw" / "inputs.csv"
-    
+
     # Data Pipeline (Clean -> Scale -> Split -> Load)
     try:
         train_loader, val_loader, test_loader = load_and_clean_data(

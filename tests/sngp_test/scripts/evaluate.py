@@ -2,8 +2,8 @@ import torch
 import numpy as np
 from scipy import stats
 from pathlib import Path
-from comp_design_fw.tests.sngp_test.core.model import load_model
-from comp_design_fw.tests.sngp_test.utils.data_cleaning import load_and_clean_data
+from sngp_test.core.model import load_model
+from sngp_test.utils.data_cleaning import load_and_clean_data
 
 # Path Resolution
 # evaluate.py is in new_sota/tests/hybrid_arch/scripts/
@@ -16,7 +16,7 @@ SCRIPT_DIR = Path(__file__).parent
 # .parent (tests)
 # .parent (new_sota)
 # .parent (root)
-ROOT = SCRIPT_DIR.parent.parent.parent.parent
+ROOT = SCRIPT_DIR.parent.parent.parent
 
 # Absolute paths for consistency
 DEFAULT_MODEL_PATH = SCRIPT_DIR.parent / "model" / "sngp_best.pth"
@@ -84,10 +84,10 @@ def main():
     except Exception as e:
         print(f"Failed to load model: {e}")
         return
-
+    
     # 2. Load Data (Single call to get all loaders)
     try:
-        train_loader, _, test_loader = load_and_clean_data(csv_path=str(DEFAULT_CSV_PATH), batch_size=32)
+        train_loader, _, test_loader = load_and_clean_data(csv_path=Path(DEFAULT_CSV_PATH), batch_size=32)
         print("Data loaded successfully.")
     except Exception as e:
         print(f"Data loading failed: {e}")

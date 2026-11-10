@@ -4,9 +4,9 @@ import torch
 from pathlib import Path
 from scipy import stats
 
-from comp_design_fw.tests.sngp_test.core.model import setup_model
-from comp_design_fw.tests.sngp_test.core.trainer import SNGPTrainer
-from comp_design_fw.tests.sngp_test.utils.data_cleaning import load_and_clean_data
+from sngp_test.core.model import setup_model
+from sngp_test.core.trainer import SNGPTrainer
+from sngp_test.utils.data_cleaning import load_and_clean_data
 
 SEED = 0
 

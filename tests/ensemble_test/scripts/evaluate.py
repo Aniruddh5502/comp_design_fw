@@ -51,7 +51,7 @@ FONT_MONO = 'Anthropic Mono Variable'
 FONT_SIZE_BASE = 14
 FONT_SIZE_SMALL = 12
 FIG_DPI = 300
-MIN_FIG_SIZE = (8, 4)
+MIN_FIG_SIZE = (8, 4.5)
 
 
 def setup_style():
@@ -181,7 +181,7 @@ def plot_reliability_diagram(var: np.ndarray, abs_error: np.ndarray, target_name
 
         plt.tight_layout()
         safe_name = name.replace(' ', '_')
-        plt.savefig(save_dir / f"reliability_diagram_{safe_name}.svg", bbox_inches='tight', pad_inches=0.25, facecolor='white')
+        plt.savefig(save_dir / f"reliability_diagram_{safe_name}.png", bbox_inches='tight', pad_inches=0.25, facecolor='white')
         plt.close()
 
 
@@ -214,7 +214,7 @@ def plot_training_curves(history_path: Path, save_dir: Path):
     ax.grid(True, alpha=0.4, linestyle='-', linewidth=0.5, color='#CCCCCC')
 
     plt.tight_layout()
-    plt.savefig(save_dir / "training_curves.svg", bbox_inches='tight', pad_inches=0.25, facecolor='white')
+    plt.savefig(save_dir / "training_curves.png", bbox_inches='tight', pad_inches=0.25, facecolor='white')
     plt.close()
 
 
@@ -259,7 +259,7 @@ def plot_correlation_heatmap(corr_df: pd.DataFrame, save_dir: Path):
     cbar.ax.tick_params(labelsize=FONT_SIZE_SMALL - 1)
     
     plt.tight_layout()
-    plt.savefig(save_dir / "correlation_heatmap.svg", bbox_inches='tight', pad_inches=0.25, facecolor='white')
+    plt.savefig(save_dir / "correlation_heatmap.png", bbox_inches='tight', pad_inches=0.25, facecolor='white')
     plt.close()
 
 
@@ -307,7 +307,7 @@ def plot_error_distribution(abs_error: np.ndarray, target_names: list, save_dir:
     fig.suptitle('Absolute Error Distribution by Target', fontfamily=FONT_SERIF, fontweight='bold', 
                  fontsize=FONT_SIZE_BASE + 4, y=1.02)
     plt.tight_layout()
-    plt.savefig(save_dir / "error_distribution.svg", bbox_inches='tight', pad_inches=0.25, facecolor='white')
+    plt.savefig(save_dir / "error_distribution.png", bbox_inches='tight', pad_inches=0.25, facecolor='white')
     plt.close()
 
 
