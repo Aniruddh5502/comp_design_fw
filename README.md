@@ -2,7 +2,7 @@
 Topic: Research on making higher correlation error/variance prediction system for better Absolute Error prediction.
 Description: In this research I am working with finding uncertainity prediciton methods that has better correlation with absolute error and can give a better estimate of the Actual Error in the prediction of a Surrogate model specially in SDOF Compliant Mechanicsms in Macro Scale dataset from FEA as a regression problem.
 Date: 11/11/2026
-Draft: True
+Draft: true
 ---
 # Can I trust the process that made the Surrogate
 
