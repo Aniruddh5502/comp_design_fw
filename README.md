@@ -1,7 +1,6 @@
 > Research Logs
 
-## 1. Title
-**Can I trust the process that made the Surrogate**
+# Can I trust the process that made the Surrogate
 
 ## 2. The Question
 Predicting and trying to find any way to tweak the architecture so that the error estimation can predict the amount of absolute error. And have a Pearson/Spearman correlation between Error Prediction VS Absolute Error.
