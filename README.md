@@ -9,7 +9,7 @@ Draft: true
 ## 2. The Question
 Predicting and trying to find any way to tweak the architecture so that the error estimation can predict the amount of absolute error. And have a Pearson/Spearman correlation between Error Prediction VS Absolute Error.
 
-## Arch Choice
+## Architecture Choice
 First we tested some fany architectures to see if they hold up with the expectations. I tested Ensemble Surrogates, SNGP on multi output regression type problem where we use FEA data from a SDOF compliant mechanicsms Static Structural and Modal Analysis information. And from the results we have seen that there is minimal relation/correlation between the error prediction from member varaince in Ensemble and GP prediction from SNGP that doesn't strongly relate the error prediction with absolute error. Both of those test cases had $<0.5$ in both absolute Spearman and Pearson Correlation.
 
 Now I am testing vanilla NN on this 1200+ datapoint training data from FEA simulations to train a Vanilla NN to predict its outputs, and then we shall see the error measurements after we test it with the test set and try to see the pattern in which the error varies.
