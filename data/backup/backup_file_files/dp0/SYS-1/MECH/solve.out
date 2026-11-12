@@ -1,0 +1,766 @@
+
+ Ansys Mechanical Enterprise Academic Student      
+
+
+ *------------------------------------------------------------------*
+ |                                                                  |
+ |   W E L C O M E   T O   T H E   A N S Y S (R)  P R O G R A M     |
+ |                                                                  |
+ *------------------------------------------------------------------*
+
+
+
+
+ ***************************************************************
+ *         ANSYS MAPDL 2026 R1          LEGAL NOTICES          *
+ ***************************************************************
+ *                                                             *
+ * Copyright (c) 2026 Synopsys, Inc. and ANSYS, Inc.           *
+ * All rights reserved.                                        *
+ * Unauthorized use, distribution or duplication is            *
+ * prohibited.                                                 *
+ *                                                             *
+ * Ansys is a registered trademark of Ansys, Inc. or its       *
+ * subsidiaries in the United States or other countries.       *
+ * See the Ansys, Inc. online documentation or the Ansys, Inc. *
+ * documentation CD or online help for the complete Legal      *
+ * Notice.                                                     *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * THIS ANSYS SOFTWARE PRODUCT AND PROGRAM DOCUMENTATION       *
+ * INCLUDE TRADE SECRETS AND CONFIDENTIAL AND PROPRIETARY      *
+ * PRODUCTS OF ANSYS, INC., ITS SUBSIDIARIES, OR LICENSORS.    *
+ * The software products and documentation are furnished by    *
+ * Ansys, Inc. or its subsidiaries under a software license    *
+ * agreement that contains provisions concerning               *
+ * non-disclosure, copying, length and nature of use,          *
+ * compliance with exporting laws, warranties, disclaimers,    *
+ * limitations of liability, and remedies, and other           *
+ * provisions.  The software products and documentation may be *
+ * used, disclosed, transferred, or copied only in accordance  *
+ * with the terms and conditions of that software license      *
+ * agreement.                                                  *
+ *                                                             *
+ * Ansys, Inc. is a UL registered                              *
+ * ISO 9001:2015 company.                                      *
+ *                                                             *
+ ***************************************************************
+ *                                                             *
+ * This product is subject to U.S. laws governing export and   *
+ * re-export.                                                  *
+ *                                                             *
+ * For U.S. Government users, except as specifically granted   *
+ * by the Ansys, Inc. software license agreement, the use,     *
+ * duplication, or disclosure by the United States Government  *
+ * is subject to restrictions stated in the Ansys, Inc.        *
+ * software license agreement and FAR 12.212 (for non-DOD      *
+ * licenses).                                                  *
+ *                                                             *
+ ***************************************************************
+
+ 2026 R1 
+     
+ Point Releases and Patches installed:   
+     
+ Ansys, Inc. License Manager 2026 R1 
+ Discovery (full install) 2026 R1
+ Core WB Files 2026 R1   
+ optiSLang Core UI 2026 R1   
+ CFX (includes CFD-Post) 2026 R1 
+ Chemkin 2026 R1 
+ EnSight 2026 R1 
+ FENSAP-ICE 2026 R1  
+ Fluent (includes CFD-Post) 2026 R1  
+ Polyflow (includes CFD-Post) 2026 R1
+ Forte (includes EnSight) 2026 R1
+ Rocky 2026 R1   
+ TurboGrid 2026 R1   
+ ACIS Geometry Interface 2026 R1 
+ AutoCAD Geometry Interface 2026 R1  
+ Catia, Version 4 Geometry Interface 2026 R1 
+ Catia, Version 5 Geometry Interface 2026 R1 
+ Catia, Version 6 Geometry Interface 2026 R1 
+ Creo Elements/Direct Modeling Geometry Interface 2026 R1
+ Creo Parametric Geometry Interface 2026 R1  
+ Inventor Geometry Interface 2026 R1 
+ JTOpen Geometry Interface 2026 R1   
+ NX Geometry Interface 2026 R1   
+ Parasolid Geometry Interface  2026 R1   
+ Solid Edge Geometry Interface 2026 R1   
+ SOLIDWORKS Geometry Interface 2026 R1   
+ Speos 2026 R1   
+ SpaceClaim 2026 R1  
+ Speos RPC 2026 R1   
+ Zemax OpticStudio 2026 R1   
+ Dynamic Reporting 2026 R1   
+ Aqwa 2026 R1
+ Autodyn 2026 R1 
+ Material Calibration App 2026 R1
+ Mechanical Products 2026 R1 
+ Motion 2026 R1  
+ Academic Student 2026 R1
+
+
+          *****  MAPDL COMMAND LINE ARGUMENTS  *****
+  BATCH MODE REQUESTED (-b)    = NOLIST
+  INPUT FILE COPY MODE (-c)    = COPY
+  DISTRIBUTED MEMORY PARALLEL REQUESTED
+       4 PARALLEL PROCESSES REQUESTED WITH SINGLE THREAD PER PROCESS
+    TOTAL OF     4 CORES REQUESTED
+  INPUT FILE NAME              = C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835\dummy.dat
+  OUTPUT FILE NAME             = C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835\solve.out
+  START-UP FILE MODE           = NOREAD
+  STOP FILE MODE               = NOREAD
+
+ RELEASE= 2026 R1              BUILD= 26.1      UP20260202   VERSION=WINDOWS x64 
+ CURRENT JOBNAME=file0  01:25:29  OCT 03, 2026  Elapsed Time=       0.078
+
+
+ PARAMETER _DS_PROGRESS =     999.0000000    
+
+ /INPUT FILE= ds.dat  LINE=       0
+
+
+
+ *** NOTE ***                            ELAPSED TIME =       4.816   TIME= 01:25:29
+ The /CONFIG,NOELDB command is not valid in a distributed memory         
+ parallel solution.  Command is ignored.                                 
+
+ *GET  _WALLSTRT  FROM  ACTI  ITEM=TIME WALL  VALUE= 0.134301178E-02
+
+ ASSIGN FILE RSTP TO file.rst                                                                                                                                                                                                                                                            
+
+ *** NOTE ***                            ELAPSED TIME =       4.869   TIME= 01:25:29
+ File= file.rst does not exist and will be created.                      
+
+ *****  MAPDL SOLUTION ROUTINE  *****
+
+
+ PERFORM A STATIC ANALYSIS
+  RESTART WILL BE PERFORMED FOR THE ANALYSIS OF LINEAR PERTURBATION
+  RESTART WILL BE PERFORMED BASED ON: 
+   PREVIOUS LOADSTEP =      1 SUBSTEP =      1
+
+ RESUME ANSYS DATA FROM FILE NAME=file.rdb                                                                                                                                                                                                                                                            
+     DO NOT PLOT ANYTHING
+
+ *** MAPDL GLOBAL STATUS *** 
+
+ TITLE = parametric_file--Static Structural (B5)                               
+ ANALYSIS TYPE =  STATIC (STEADY-STATE)
+         1 ELEM TYPES DEFINED    MAX ELEM TYPE NUMBER =             1
+      3096 ELEMENTS DEFINED      MAX ELEMENT NUMBER =            3096
+     19487 NODES DEFINED         MAX NODE NUMBER =              19487
+         1 MATERIALS DEFINED     MAX MATERIAL NUMBER =              1
+         0 REAL CONSTS DEFINED   MAX REAL CONST NUMBER =            0
+         0 SECTIONS DEFINED      MAX SECTION NUMBER =               0
+         0 COORD SYS DEFINED     MAX COORD SYS NUMBER =             0
+ 
+ ACTIVE COORDINATE SYSTEM             =          0  (CARTESIAN)
+ NUMBER OF DEFINED NODAL CONSTRAINTS  =        984
+ NUMBER OF DEFINED NODAL LOADS        =          0
+ NUMBER OF DEFINED COMPONENTS         =          2
+ NUMBER OF DEFINED ELEM SURFACE LOADS =          0
+ NUMBER OF DEFINED ELEM BODY LOADS    =          0
+ NUMBER OF DEFINED NODE BODY FORCES   =          0
+ CURRENT LOAD CASE =      0 OF      0
+ LOAD SET   =       1
+ SUBSTEP    =       1
+ TIME/FREQ  =    1.0000    
+
+ INITIAL JOBNAME = file0
+ CURRENT JOBNAME = file0
+
+ RESTART PROCEDURE RE-BUILDS BOUNDARY CONDITIONS
+ AND LOADING INFO UPTO THE CURRENT LOADSTEP 
+
+ READ ANSYS LOADS DATA FROM FILE= file.ldhi                                                                                                                                                                                                                                                           
+
+ DELETE SOLID MODEL BOUNDARY CONDITIONS
+ 
+ NUMBER OF NODAL CONSTRAINTS DELETED                       =       984
+
+ SET PARAMETER DIMENSIONS ON  _WB_PROJECTSCRATCH_DIR_MODAL
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_PROJECTSCRATCH_DIR_MODAL(1) = C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835\
+
+ SET PARAMETER DIMENSIONS ON  _WB_SOLVERFILES_DIR_MODAL
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_SOLVERFILES_DIR_MODAL(1) = C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\parametric_file_files\dp0\SYS-1\MECH\
+
+ SET PARAMETER DIMENSIONS ON  _WB_USERFILES_DIR_MODAL
+  TYPE=STRI  DIMENSIONS=      248        1        1
+
+ PARAMETER _WB_USERFILES_DIR_MODAL(1) = C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\parametric_file_files\user_files\
+
+ TITLE= 
+ parametric_file--Modal (C5)                                                   
+
+  ACT Extensions:
+      LSDYNA, 2026.1
+      5f463412-bd3e-484b-87e7-cbc0a665e474, wbex
+      ANSYSMotion, 2026.1
+      20180725-3f81-49eb-9f31-41364844c769, wbex
+
+ PERTURB: Enabling perturbation analysis with prestressed modal solution.
+ PERTURB: Enabling perturbation contact status remains the same as in restart step.
+ PERTURB: Enabling perturbation to delete all boundary conditions except for constraints and temperatures and also put all non-zero displacement constraints to zero values.
+
+ *****  MAPDL SOLVE    COMMAND  *****
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2026 R1          26.1     ***
+ Ansys Mechanical Enterprise Academic Student      
+ 01055371  VERSION=WINDOWS x64   01:25:29  OCT 03, 2026 Elapsed Time=      5.038
+
+ parametric_file--Modal (C5)                                                   
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .3-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY   UZ  
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .STATIC (STEADY-STATE)
+      RESTART. . . . . . . . . . . . . . . . . . .ON
+   LINEAR PERTURBATION . . . . . . . . . . . . . .ON
+   OFFSET TEMPERATURE FROM ABSOLUTE ZERO . . . . .  273.15    
+   NONLINEAR GEOMETRIC EFFECTS . . . . . . . . . .ON
+   STRESS-STIFFENING . . . . . . . . . . . . . . .ON
+
+ *** WARNING ***                         ELAPSED TIME =       5.056   TIME= 01:25:29
+ It has been detected that you are using reduced integration brick       
+ elements along with the PCG solver (EQSLV,PCG).  Please verify that     
+ you have multiple elements through the thickness in your model or       
+ switch to the SPARSE solver (EQSLV,SPARSE).                             
+
+                      L O A D   S T E P   O P T I O N S
+
+   SOLUTION TO BE PERTURBED CORRESPONDS TO
+      TIME . . . . . . . . . . . . . . . . . . . .  1.0000    
+      LOAD STEP. . . . . . . . . . . . . . . . . .     1
+      SUBSTEP. . . . . . . . . . . . . . . . . . .     1
+   INERTIA LOADS                        X           Y           Z 
+      ACEL . . . . . . . . . . . .-0.26180E-10  98000.      0.0000
+
+ *** NOTE ***                            ELAPSED TIME =       5.181   TIME= 01:25:29
+ This SOLVE command is only used to generate the matrices needed to      
+ perform the linear perturbation analysis.  The linear perturbation      
+ analysis corresponds to time = 1 (load step = 1, substep = 1).  No      
+ results are being written.                                              
+
+
+ *** NOTE ***                            ELAPSED TIME =       5.183   TIME= 01:25:29
+ The PCG solver has automatically set the level of difficulty for this   
+ model to 3.                                                             
+
+ LINEAR PERTURBATION ANALYSIS PROCEDURE DELETES ALL
+ BOUNDARY CONDITIONS EXCEPT CONSTRAINTS AND TEMPERATURES FROM DATABASE
+
+ PARAMETER _THICKRATIO =     1.000000000    
+
+ THERMAL STRAINS ARE NOT INCLUDED IN THE LOAD VECTOR.
+
+
+ USE SYM. BLOCK LANCZOS MODE EXTRACTION METHOD
+  EXTRACT     6 MODES
+  NORMALIZE THE MODE SHAPES TO THE MASS MATRIX
+
+ ERASE THE CURRENT DATABASE OUTPUT CONTROL TABLE.
+
+
+ WRITE ALL  ITEMS TO THE DATABASE WITH A FREQUENCY OF NONE
+   FOR ALL APPLICABLE ENTITIES
+
+ WRITE NSOL ITEMS TO THE DATABASE WITH A FREQUENCY OF ALL 
+   FOR ALL APPLICABLE ENTITIES
+
+
+ EXPAND ALL EXTRACTED MODES
+  DO NOT CALCULATE ELEMENT RESULTS
+
+ DO NOT COMBINE ELEMENT SAVE DATA FILES (.esav) AFTER DISTRIBUTED PARALLEL SOLUTION
+
+ DO NOT COMBINE ELEMENT MATRIX FILES (.emat) AFTER DISTRIBUTED PARALLEL SOLUTION
+
+ DO NOT COMBINE ASSEMBLED MATRIX FILES (.full) AFTER DISTRIBUTED PARALLEL SOLUTION
+
+ *****  MAPDL SOLVE    COMMAND  *****
+
+ *** WARNING ***                         ELAPSED TIME =       5.761   TIME= 01:25:30
+ Element shape checking is currently inactive.  Issue SHPP,ON or         
+ SHPP,WARN to reactivate, if desired.                                    
+
+ *** NOTE ***                            ELAPSED TIME =       5.764   TIME= 01:25:30
+ The model data was checked and warning messages were found.             
+  Please review output or errors file (                                  
+ C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\ 
+ \_ProjectScratch\ScrB835\file0.err ) for these warning messages.        
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+      --- GIVE SUGGESTIONS AND RESET THE KEY OPTIONS ---
+
+ ELEMENT TYPE         1 IS SOLID186. KEYOPT(2) IS ALREADY SET AS SUGGESTED AND NO
+ RESETTING IS NEEDED.
+
+
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2026 R1          26.1     ***
+ Ansys Mechanical Enterprise Academic Student      
+ 01055371  VERSION=WINDOWS x64   01:25:30  OCT 03, 2026 Elapsed Time=      5.765
+
+ parametric_file--Modal (C5)                                                   
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .3-D                  
+   DEGREES OF FREEDOM. . . . . . UX   UY   UZ  
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .MODAL                
+      EXTRACTION METHOD. . . . . . . . . . . . . .BLOCK LANCZOS
+   LINEAR PERTURBATION . . . . . . . . . . . . . .ON
+   OFFSET TEMPERATURE FROM ABSOLUTE ZERO . . . . .  273.15    
+   THERMAL EXPANSION . . . . . . . . . . . . . . .OFF
+   PRESTRESS EFFECTS INCLUDED IF AVAILABLE . . . .YES
+   NUMBER OF MODES TO EXTRACT. . . . . . . . . . .     6
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
+   NUMBER OF MODES TO EXPAND . . . . . . . . . . .ALL
+   ELEMENT RESULTS CALCULATION . . . . . . . . . .OFF
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   THERMAL STRAINS INCLUDED IN THE LOAD VECTOR . .    NO
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS
+      ITEM     FREQUENCY   COMPONENT
+       ALL       NONE               
+      NSOL        ALL               
+
+
+ ELEMENT GEOMETRY HAS BEEN UPDATED USING TOTAL
+ DISPLACEMENTS FROM THE BASE ANALYSIS AT THE RESTART POINT.
+
+
+                         ***********  PRECISE MASS SUMMARY  ***********
+
+   TOTAL RIGID BODY MASS MATRIX ABOUT ORIGIN
+               Translational mass               |   Coupled translational/rotational mass
+        0.75276E-05    0.0000        0.0000     |     0.0000       0.37638E-04   0.86567E-04
+         0.0000       0.75276E-05    0.0000     |   -0.37638E-04    0.0000      -0.37161E-12
+         0.0000        0.0000       0.75276E-05 |   -0.86567E-04   0.37161E-12    0.0000    
+     ------------------------------------------ | ------------------------------------------
+                                                |         Rotational mass (inertia)
+                                                |    0.30176E-02   0.47895E-10   0.18581E-11
+                                                |    0.47895E-10   0.24977E-02   0.43284E-03
+                                                |    0.18581E-11   0.43284E-03   0.50135E-02
+
+   TOTAL MASS = 0.75276E-05
+     The mass principal axes coincide with the global Cartesian axes
+
+   CENTER OF MASS (X,Y,Z)=  -0.49367E-07   -11.500        5.0000    
+
+   TOTAL INERTIA ABOUT CENTER OF MASS
+        0.18339E-02   0.52169E-10  -0.81146E-18
+        0.52169E-10   0.23095E-02   0.15721E-17
+       -0.81146E-18   0.15721E-17   0.40180E-02
+     The inertia principal axes coincide with the global Cartesian axes
+
+
+  *** MASS SUMMARY BY ELEMENT TYPE ***
+
+  TYPE      MASS
+     1  0.752757E-05
+
+  BLOCK LANCZOS CALCULATION OF UP TO     6 EIGENVECTORS.
+  NUMBER OF EQUATIONS              =        57477
+  MAXIMUM WAVEFRONT                =          276
+  MAXIMUM MODES STORED             =            6
+  MINIMUM EIGENVALUE               =  0.00000E+00
+  MAXIMUM EIGENVALUE               =  0.10000E+31
+
+
+
+  Memory allocated on only this MPI rank (rank     0)
+  -------------------------------------------------------------------
+  Equation solver memory allocated                     =    60.784 MB
+  Equation solver memory required for in-core mode     =    57.924 MB
+  Equation solver memory required for out-of-core mode =    25.413 MB
+  Total (solver and non-solver) memory allocated       =   611.456 MB
+
+
+  Total memory summed across all MPI ranks on this machines
+  -------------------------------------------------------------------
+  Equation solver memory allocated                     =   282.405 MB
+  Equation solver memory required for in-core mode     =   269.121 MB
+  Equation solver memory required for out-of-core mode =   116.475 MB
+  Total (solver and non-solver) memory allocated       =  1501.233 MB
+
+ *** NOTE ***                            ELAPSED TIME =       6.749   TIME= 01:25:31
+ The Distributed Sparse Matrix Solver is currently running in the        
+ in-core memory mode.  This memory mode uses the most amount of memory   
+ in order to avoid using the hard drive as much as possible, which most  
+ often results in the fastest solution time.  This mode is recommended   
+ if enough physical memory is present to accommodate all of the solver   
+ data.                                                                   
+
+  Process memory required for in-core LANCZOS Workspace             =     60.410355 MB
+  Process memory required for out-of-core LANCZOS Workspace         =     1.909531 MB
+
+  Total   memory required for in-core LANCZOS Workspace             =     222.942139 MB
+  Total   memory required for out-of-core LANCZOS Workspace         =     7.192902 MB
+
+  Lanczos Memory Mode : INCORE
+
+
+  >> Shift # 1 :  |                                  : 6 Eigenvalues Converged
+
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2026 R1          26.1     ***
+ Ansys Mechanical Enterprise Academic Student      
+ 01055371  VERSION=WINDOWS x64   01:25:32  OCT 03, 2026 Elapsed Time=      8.003
+
+ parametric_file--Modal (C5)                                                   
+
+
+
+ *** FREQUENCIES FROM BLOCK LANCZOS ITERATION ***
+
+  MODE    FREQUENCY (HERTZ)      
+
+
+    1     87.98790334824    
+    2     131.0874200234    
+    3     191.1906617414    
+    4     269.5423946896    
+    5     289.3760174220    
+    6     300.7873984899    
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2026 R1          26.1     ***
+ Ansys Mechanical Enterprise Academic Student      
+ 01055371  VERSION=WINDOWS x64   01:25:32  OCT 03, 2026 Elapsed Time=      8.163
+
+ parametric_file--Modal (C5)                                                   
+
+
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  X  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01  -0.22281E-05    0.002381    0.496446E-11    0.564871E-05    0.659504E-06
+     2     131.087       0.76285E-02   0.93562E-03    1.000000    0.875386E-06    0.996044        0.116291    
+     3     191.191       0.52304E-02  -0.58665E-04    0.062702    0.344162E-08    0.999960        0.457202E-03
+     4     269.542       0.37100E-02  -0.94051E-06    0.001005    0.884567E-12    0.999961        0.117510E-06
+     5     289.376       0.34557E-02    0.0000        0.000000     0.00000        0.999961         0.00000    
+     6     300.787       0.33246E-02   0.58291E-05    0.006230    0.339782E-10     1.00000        0.451383E-05
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.878867E-06                    0.116753    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  Y  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01   0.23426E-02    1.000000    0.548758E-05    0.933927        0.728997    
+     2     131.087       0.76285E-02   0.40466E-05    0.001727    0.163748E-10    0.933930        0.217531E-05
+     3     191.191       0.52304E-02   0.21452E-05    0.000916    0.460202E-11    0.933931        0.611355E-06
+     4     269.542       0.37100E-02   0.18383E-03    0.078472    0.337920E-07    0.939682        0.448910E-02
+     5     289.376       0.34557E-02    0.0000        0.000000     0.00000        0.939682         0.00000    
+     6     300.787       0.33246E-02   0.59533E-03    0.254137    0.354418E-06     1.00000        0.470827E-01
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.587581E-05                    0.780572    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****  Z  DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01    0.0000        0.000000     0.00000         0.00000         0.00000    
+     2     131.087       0.76285E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+     3     191.191       0.52304E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+     4     269.542       0.37100E-02    0.0000        0.000000     0.00000         0.00000         0.00000    
+     5     289.376       0.34557E-02   0.21604E-02    1.000000    0.466739E-05     1.00000        0.620040    
+     6     300.787       0.33246E-02    0.0000        0.000000     0.00000         1.00000         0.00000    
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.466739E-05                    0.620040    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTX DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01  -0.11713E-01    0.467366    0.137190E-03    0.177027        0.454635E-01
+     2     131.087       0.76285E-02  -0.20233E-04    0.000807    0.409370E-09    0.177028        0.135662E-06
+     3     191.191       0.52304E-02  -0.10726E-04    0.000428    0.115050E-09    0.177028        0.381268E-07
+     4     269.542       0.37100E-02  -0.91913E-03    0.036675    0.844800E-06    0.178118        0.279960E-03
+     5     289.376       0.34557E-02  -0.25061E-01    1.000000    0.628068E-03    0.988567        0.208136    
+     6     300.787       0.33246E-02  -0.29767E-02    0.118775    0.886046E-05     1.00000        0.293628E-02
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.774963E-03                    0.256816    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTY DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01  -0.11141E-04    0.002381    0.124112E-09    0.564869E-05    0.496896E-07
+     2     131.087       0.76285E-02   0.46781E-02    1.000000    0.218846E-04    0.996042        0.876178E-02
+     3     191.191       0.52304E-02  -0.29333E-03    0.062702    0.860406E-07    0.999958        0.344474E-04
+     4     269.542       0.37100E-02  -0.47026E-05    0.001005    0.221142E-10    0.999959        0.885369E-08
+     5     289.376       0.34557E-02   0.77390E-05    0.001654    0.598928E-10    0.999961        0.239788E-07
+     6     300.787       0.33246E-02   0.29145E-04    0.006230    0.849455E-09     1.00000        0.340090E-06
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.219717E-04                    0.879665E-02
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+          ***** PARTICIPATION FACTOR CALCULATION *****ROTZ DIRECTION
+                                                                                  CUMULATIVE     RATIO EFF.MASS
+  MODE   FREQUENCY       PERIOD      PARTIC.FACTOR     RATIO    EFFECTIVE MASS   MASS FRACTION   TO TOTAL MASS
+     1     87.9879       0.11365E-01   0.21954E-04    0.000620    0.481960E-09    0.356947E-06    0.961329E-07
+     2     131.087       0.76285E-02   0.99207E-02    0.280398    0.984212E-04    0.728926E-01    0.196313E-01
+     3     191.191       0.52304E-02  -0.35381E-01    1.000000    0.125181E-02     1.00000        0.249688    
+     4     269.542       0.37100E-02   0.21059E-04    0.000595    0.443496E-09     1.00000        0.884608E-07
+     5     289.376       0.34557E-02    0.0000        0.000000     0.00000         1.00000         0.00000    
+     6     300.787       0.33246E-02   0.64636E-05    0.000183    0.417777E-10     1.00000        0.833308E-08
+ -----------------------------------------------------------------------------------------------------------------
+   sum                                                            0.135023E-02                    0.269320    
+ -----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+ *** NOTE ***                            ELAPSED TIME =       8.163   TIME= 01:25:32
+ The modes requested are mass normalized (Nrmkey on MODOPT).  However,   
+ the modal masses and kinetic energies below are calculated with unit    
+ normalized modes.                                                       
+
+        ***** MODAL MASSES, KINETIC ENERGIES, AND TRANSLATIONAL EFFECTIVE MASSES SUMMARY *****
+
+                                                                         EFFECTIVE MASS
+  MODE  FREQUENCY   MODAL MASS     KENE      |      X-DIR      RATIO%   Y-DIR      RATIO%   Z-DIR      RATIO% 
+     1   87.99      0.4277E-05  0.6536       |    0.4964E-11    0.00  0.5488E-05   72.90   0.000        0.00
+     2   131.1      0.1447E-05  0.4909       |    0.8754E-06   11.63  0.1637E-10    0.00   0.000        0.00
+     3   191.2      0.1356E-05  0.9785       |    0.3442E-08    0.05  0.4602E-11    0.00   0.000        0.00
+     4   269.5      0.1082E-05   1.552       |    0.8846E-12    0.00  0.3379E-07    0.45   0.000        0.00
+     5   289.4      0.3003E-05   4.964       |     0.000        0.00   0.000        0.00  0.4667E-05   62.00
+     6   300.8      0.1186E-05   2.118       |    0.3398E-10    0.00  0.3544E-06    4.71   0.000        0.00
+ --------------------------------------------------------------------------------------------------------------
+   sum                                       |    0.8789E-06   11.68  0.5876E-05   78.06  0.4667E-05   62.00
+ --------------------------------------------------------------------------------------------------------------
+
+
+ *** MAPDL BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+       33.625 MB WRITTEN ON ELEMENT MATRIX FILE: file0.emat
+        5.188 MB WRITTEN ON ELEMENT SAVED DATA FILE: file0.esav
+       17.062 MB WRITTEN ON ASSEMBLED MATRIX FILE: file0.full
+        0.812 MB WRITTEN ON MODAL MATRIX FILE: file0.mode
+        1.688 MB WRITTEN ON RESULTS FILE: file0.rst
+
+ DELETE ALL SPECIFIED NODAL LOADS FROM NODE         1 TO     19487 BY       1
+
+ NUMBER OF NODAL LOADS DELETED=       0
+
+ ACEL=    0.0000      0.0000      0.0000    
+
+  CMOMEGA on ALL components are being deleted.
+
+ CGOMGA=  0.0000      0.0000      0.0000    
+
+ CMDOMEGA on ALL components are being deleted.
+
+ DCGOMG=  0.0000      0.0000      0.0000    
+ *************** Write FE CONNECTORS *********
+
+ WRITE OUT CONSTRAINT EQUATIONS TO FILE= file.ce                                                                                                                                                                                                                                                             
+
+ *GET  _NMODALSOLPROC  FROM  ACTI  ITEM=NUMC       VALUE=  4.00000000    
+
+ FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  ELAPSED TIME =         8.262
+
+
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _WALLASOL  FROM  ACTI  ITEM=TIME WALL  VALUE= 0.229575844E-02
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2026 R1          26.1     ***
+ Ansys Mechanical Enterprise Academic Student      
+ 01055371  VERSION=WINDOWS x64   01:25:32  OCT 03, 2026 Elapsed Time=      8.268
+
+ parametric_file--Modal (C5)                                                   
+
+
+
+          ***** MAPDL RESULTS INTERPRETATION (POST1) *****
+
+ *** NOTE ***                            ELAPSED TIME =       8.268   TIME= 01:25:32
+ Reading results into the database (SET command) will update the current 
+ displacement and force boundary conditions in the database with the     
+ values from the results file for that load set.  Note that any          
+ subsequent solutions will use these values unless action is taken to    
+ either SAVE the current values or not overwrite them (/EXIT,NOSAVE).    
+
+ *** NOTE ***                            ELAPSED TIME =       8.268   TIME= 01:25:32
+ The nodal coordinates were updated from their original locations during 
+ a prior operation (an explicit UPCOORD or UPGEOM, or a linear           
+ perturbation analysis).                                                 
+
+ PRINTOUT RESUMED BY /GOP
+
+ Set Encoding of XML File to:ISO-8859-1
+
+ Set Output of XML File to:
+     PARM,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,     ,
+         ,     ,     ,     ,     ,     ,     ,
+
+ DATABASE WRITTEN ON FILE  parm.xml                                                                                                                                                                                                                                                            
+
+ EXIT THE MAPDL POST1 DATABASE PROCESSOR
+
+
+ ***** ROUTINE COMPLETED *****  ELAPSED TIME =         8.278
+
+
+
+ PRINTOUT RESUMED BY /GOP
+
+ *GET  _WALLDONE  FROM  ACTI  ITEM=TIME WALL  VALUE= 0.229959758E-02
+
+ PARAMETER _PREPTIME =    0.4082220000E-01
+
+ PARAMETER _SOLVTIME =     2.935436000    
+
+ PARAMETER _POSTTIME =    0.1382090000E-01
+
+ PARAMETER _TOTALTIM =     2.990079100    
+
+ *GET  _DLBRATIO  FROM  ACTI  ITEM=SOLU DLBR  VALUE=  1.00129199    
+
+ *GET  _COMBTIME  FROM  ACTI  ITEM=SOLU COMB  VALUE= 0.446306000E-01
+
+ *GET  _SSMODE   FROM  ACTI  ITEM=SOLU SSMM  VALUE=  2.00000000    
+
+ *GET  _NDOFS    FROM  ACTI  ITEM=SOLU NDOF  VALUE=  57477.0000    
+
+ /FCLEAN COMMAND REMOVING ALL LOCAL FILES
+ --- Total number of nodes = 19487
+ --- Total number of elements = 3096
+ --- Element load balance ratio = 1.00129199
+ --- Time to combine distributed files = 4.46306E-02
+ --- Sparse memory mode = 2
+ --- Number of DOF = 57477
+
+ EXIT MAPDL WITHOUT SAVING DATABASE
+
+
+ NUMBER OF WARNING MESSAGES ENCOUNTERED=          2
+ NUMBER OF ERROR   MESSAGES ENCOUNTERED=          0
+
++--------------------- M A P D L   S T A T I S T I C S ------------------------+
+
+Release: 2026 R1            Build: 26.1       Update: UP20260202   Platform: WINDOWS x64 
+Date Run: 10/03/2026   Time: 01:25     Process ID: 6440
+Operating System: Windows 10  (Build: 19045)
+
+Processor Model: AMD Ryzen 5 5600G with Radeon Graphics
+
+Compiler: Intel(R) Fortran Compiler Classic Version 2021.9  (Build: 20230302)
+          Intel(R) C/C++ Compiler Classic Version 2021.9  (Build: 20230302)
+          AOCL-BLAS 5.1.1 Build 20251008
+          Intel(R) oneAPI Math Kernel Library Version 2024.2.3-Product Build 20250403
+
+Number of machines requested            :    1
+Total number of cores available         :   12
+Number of physical cores available      :    6
+Number of processes requested           :    4
+Number of threads per process requested :    1
+Total number of cores requested         :    4 (Distributed Memory Parallel)               
+MPI Type: INTELMPI
+MPI Version: Intel(R) MPI Library 2021.16 for Windows* OS
+
+
+GPU Acceleration: Not Requested
+
+Job Name: file0
+Input File: dummy.dat
+
+  Core                Machine Name   Working Directory
+ -----------------------------------------------------
+     0             DESKTOP-0DVSFS6   C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835
+     1             DESKTOP-0DVSFS6   C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835
+     2             DESKTOP-0DVSFS6   C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835
+     3             DESKTOP-0DVSFS6   C:\Users\Administrator\Desktop\code\comp_design_fw\data\ansys_projects\_ProjectScratch\ScrB835
+ 
+Latency time from master to core     1 =    4.529 microseconds
+Latency time from master to core     2 =    2.957 microseconds
+Latency time from master to core     3 =    2.955 microseconds
+ 
+Communication speed from master to core     1 =  7651.91 MB/sec
+Communication speed from master to core     2 = 12905.93 MB/sec
+Communication speed from master to core     3 = 12755.92 MB/sec
+
+Total CPU time for main thread                    :        3.5 seconds
+Total CPU time summed for all threads             :        6.1 seconds
+
+Elapsed time spent obtaining a license            :        0.4 seconds
+Elapsed time spent pre-processing model (/PREP7)  :        0.0 seconds
+Elapsed time spent solution - preprocessing       :        0.2 seconds
+Elapsed time spent computing solution             :        2.7 seconds
+   Elapsed time in element formation & assembly   :        0.5 seconds
+   Elapsed time in equation solver                :        2.1 seconds
+   Elapsed time in element result calculations    :        0.1 seconds
+Elapsed time spent solution - postprocessing      :        0.0 seconds
+Elapsed time spent post-processing model (/POST1) :        0.0 seconds
+ 
+Eigensolver used                                  :            Block Lanczos
+Sparse direct equation solver computational rate  :       38.7 Gflops
+Sparse direct equation solver effective I/O rate  :        7.5 GB/sec
+
+Sum of disk space used on all processes           :      233.6 MB
+
+Sum of memory used on all processes               :      632.0 MB
+Sum of memory allocated on all processes          :     3072.0 MB
+Physical memory available                         :         15 GB
+Total amount of I/O written to disk               :        0.3 GB
+Total amount of I/O read from disk                :        0.3 GB
+
++------------------ E N D   M A P D L   S T A T I S T I C S -------------------+
+
+
+ *-----------------------------------------------------------------------------*
+ |                                                                             |
+ |                               RUN COMPLETED                                 |
+ |                                                                             |
+ |-----------------------------------------------------------------------------|
+ |                                                                             |
+ |  Ansys MAPDL 2026 R1         Build 26.1         UP20260202    WINDOWS x64   |
+ |                                                                             |
+ |-----------------------------------------------------------------------------|
+ |                                                                             |
+ |  Database Requested(-db)     1024 MB     Scratch Memory Requested   1024 MB |
+ |  Max Database Used(Master)     11 MB     Max Scratch Used(Master)    154 MB |
+ |  Max Database Used(Workers)     1 MB     Max Scratch Used(Workers)   160 MB |
+ |  Sum Database Used(All)        14 MB     Sum Scratch Used(All)       618 MB |
+ |                                                                             |
+ |-----------------------------------------------------------------------------|
+ |                                                                             |
+ |        CP Time      (sec) =          6.094       Time  =  01:25:43          |
+ |        Elapsed Time (sec) =         18.574       Date  =  10/03/2026        |
+ |                                                                             |
+ *-----------------------------------------------------------------------------*

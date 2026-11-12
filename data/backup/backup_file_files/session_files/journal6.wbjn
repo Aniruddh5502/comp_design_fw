@@ -1,0 +1,19 @@
+# encoding: utf-8
+# 2026 R1
+SetScriptVersion(Version="26.1.174")
+parameter1 = Parameters.GetParameter(Name="P3")
+parameter1.DisplayText = "beam_height"
+parameter2 = Parameters.GetParameter(Name="P6")
+parameter2.DisplayText = "max_stress_von_mises"
+parameter3 = Parameters.GetParameter(Name="P7")
+parameter3.DisplayText = "max_deformation"
+parameter4 = Parameters.GetParameter(Name="P8")
+parameter4.DisplayText = "mode_1_freq"
+parameter5 = Parameters.GetParameter(Name="P9")
+parameter5.DisplayText = "mode_2_freq"
+parameter6 = Parameters.GetParameter(Name="P10")
+parameter6.DisplayText = "mode_3_freq"
+parameter7 = Parameters.GetParameter(Name="P11")
+parameter7.DisplayText = "mode_4_freq"
+Save(Overwrite=True)
+Save(Overwrite=True)

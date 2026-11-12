@@ -21,7 +21,6 @@ Thumbs.db
 .DS_Store
 
 # Project Specific - Data & Artifacts (Large files/Generated content)
-data/
 models/
 **/parametric_file_files/
 _ProjectScratch/

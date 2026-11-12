@@ -1,0 +1,38 @@
+{
+    "min": {
+        "beam_width": 0.2013688722879548,
+        "beam_length": 10.0017117591943,
+        "fillet_radius": 0.1009545147605954,
+        "beam_height": 5.000267675912441,
+        "max_stress_von_mises": 0.0939508571288682,
+        "max_deformation": 0.0021283109832839,
+        "mode_1_freq": 23.02788820149861,
+        "mode_2_freq": 31.202172347275955,
+        "mode_3_freq": 49.60955596653007,
+        "mode_4_freq": 51.09410939366549
+    },
+    "max": {
+        "beam_width": 1.999947632811813,
+        "beam_length": 39.97573020615898,
+        "fillet_radius": 1.999229677628755,
+        "beam_height": 19.9931295840198,
+        "max_stress_von_mises": 13.842807670326136,
+        "max_deformation": 4.947364481720527,
+        "mode_1_freq": 1139.2662734493913,
+        "mode_2_freq": 1399.9096245875346,
+        "mode_3_freq": 2018.3103491664792,
+        "mode_4_freq": 2248.947758690331
+    },
+    "columns": [
+        "beam_width",
+        "beam_length",
+        "fillet_radius",
+        "beam_height",
+        "max_stress_von_mises",
+        "max_deformation",
+        "mode_1_freq",
+        "mode_2_freq",
+        "mode_3_freq",
+        "mode_4_freq"
+    ]
+}

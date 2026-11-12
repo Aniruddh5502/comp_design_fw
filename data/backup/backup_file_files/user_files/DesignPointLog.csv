@@ -1,0 +1,65 @@
+﻿# 
+# This file contains the parameter values of the Design Points successfully updated by Ansys Workbench.
+# Project name: parametric_file
+# Creation date: 10/01/2026 19:42:15
+# 
+# 10/01/2026 19:42:15
+# The parameters defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2
+DP 0,1,20
+# 
+# A non parametric change occurred and invalidated design point results.
+# 10/01/2026 20:44:34
+# 
+# 
+# 10/01/2026 23:06:40
+# Parameters have been added and/or removed. The parameters now defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm],P3 - height [mm],P4 - fillet_radius [mm],P7 - Total Deformation Maximum [mm],P6 - Equivalent Stress Maximum [MPa]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4,P7,P6
+DP 0,0.5,30,10,1,1.6830152747267284,4.7737996162595486
+DP 0,0.7,30,10,1,0.68192817079347257,2.4128674214835466
+# 
+# A non parametric change occurred and invalidated design point results.
+# 10/01/2026 23:10:00
+# 
+# 
+# 10/02/2026 10:18:38
+# Parameters have been added and/or removed. The parameters now defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm],P3 - height [mm],P4 - fillet_radius [mm],P7 - Total Deformation Maximum [mm],P6 - Equivalent Stress Maximum [MPa],P8 - Total Deformation Reported Frequency [Hz],P9 - mode_2 Reported Frequency [Hz],P10 - mode_3 Reported Frequency [Hz],P11 - mode_4 Reported Frequency [Hz]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4,P7,P6,P8,P9,P10,P11
+DP 0,0.9,30,10,1,0.35926526737182746,1.6075760352579682,87.9879033482363,131.08742002336231,191.19066174139559,269.54239468962163
+# 
+# A non parametric change occurred and invalidated design point results.
+# 10/02/2026 16:00:05
+# 
+# 
+# 10/03/2026 01:25:50
+# Parameters have been added and/or removed. The parameters now defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm],P3 - height [mm],P4 - fillet_radius [mm],P7 - Total Deformation Maximum [mm],P6 - Equivalent Stress Maximum [MPa],P8 - Total Deformation Reported Frequency [Hz],P9 - mode_2 Reported Frequency [Hz],P10 - mode_3 Reported Frequency [Hz],P11 - mode_4 Reported Frequency [Hz]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4,P7,P6,P8,P9,P10,P11
+DP 0,0.9,30,10,1,0.35926526737182746,1.6075760352579682,87.9879033482363,131.08742002336231,191.19066174139559,269.54239468962163
+# 
+# 10/07/2026 20:13:18
+# Parameters have been added and/or removed. The parameters now defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm],P3 - beam_height [mm],P4 - fillet_radius [mm],P7 - max_deformation [mm],P6 - max_stress_von_mises [MPa],P8 - mode_1_freq [Hz],P9 - mode_2_freq [Hz],P10 - mode_3_freq [Hz],P11 - mode_4_freq [Hz]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4,P7,P6,P8,P9,P10,P11
+DP 0,1.2,30,10,1,0.17625191314915406,1.2353504109099691,126.31328183787731,190.78852013509442,269.42531472725972,376.38915292561569
+# 
+# 10/08/2026 10:25:00
+# Parameters have been added and/or removed. The parameters now defined in the project are:
+# ,P1 - beam_width [mm],P2 - beam_length [mm],P3 - beam_height [mm],P4 - fillet_radius [mm],P7 - max_deformation [mm],P6 - max_stress_von_mises [MPa],P8 - mode_1_freq [Hz],P9 - mode_2_freq [Hz],P10 - mode_3_freq [Hz],P11 - mode_4_freq [Hz]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4,P7,P6,P8,P9,P10,P11
+DP 0,1.2,30,10,1,0.17625191314915406,1.2353504109215292,126.31328184090339,190.78852012576567,269.425314719034,376.38915292094771
