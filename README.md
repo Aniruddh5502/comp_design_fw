@@ -22,19 +22,21 @@ So total dataset division will be training set, error map generation set, test s
 ## Mappings
 
 ```text 
-
-config/             # Configuration settings
-data/               # All the datasets and Ansys Simulation files
-plots/              # plots from experiments
-scaler/             # Dataset Scaling data
-scripts/            # All scripts includes Ansys, simulations etc
-src/                # Constains core coders, scripts to run the simulation pipeline
-tests/              # Ansys, Sim, Loop, etc tests
-writings/           # writing the papers and its drafts, nots etc
-.gitignore          # git settings
-README.md           # This file.
-requirements.txt    # Requirements or dependencies to run the experiments in pyhton
-
+root
+    ├─── config/             # Configuration settings
+    ├─── data/               # All the datasets and Ansys Simulation files
+    ├─── plots/              # plots from experiments
+    ├─── scaler/             # Dataset Scaling data
+    ├─── scripts/            # All scripts includes Ansys, simulations etc
+    ├─── src/                # Constains core coders, scripts to run the pipeline
+    ├─── tests/              # Ansys, Sim, Loop, etc tests
+    |       ├─── ensemble_test/
+    |       ├─── sn_ablation_study/
+    |       └─── aw_arch/
+    ├─── writings/           # writing the papers and its drafts, nots etc
+    ├─── .gitignore          # git settings
+    ├─── README.md           # This file.
+    └─── requirements.txt    # Requirements or dependencies to run the experiments in pyhton
 ``` 
 
 ## Running
