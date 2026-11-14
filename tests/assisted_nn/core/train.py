@@ -76,9 +76,7 @@ class PrimaryTrainer:
     
     def train(self, 
               train_loader:DataLoader|None=None, 
-              val_loader:DataLoader|None=None, 
-              plot:bool=True,
-              analysis:bool=True):
+              val_loader:DataLoader|None=None):
         
         console.print(f"\n\n[{accent}]Training Starting.\n[/]")
         
@@ -148,7 +146,8 @@ class PrimaryTrainer:
         
         if savefig:
             plt.savefig(plots_folder / "Primary-Training-Loss.svg",bbox_inches='tight', pad_inches=0.25)
-        
+     
+
 
 if __name__=="__main__":
     
