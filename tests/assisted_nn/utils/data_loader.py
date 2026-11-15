@@ -38,7 +38,7 @@ def load_and_clean_dataset(dataset_path:Path)->pd.DataFrame:
     return df
 
 # scaling the dataset into normal form
-def scale_normal(dataframe:pd.DataFrame, scale_dir:Path)->pd.DataFrame:
+def scale_normal(dataframe:pd.DataFrame, scale_dir:Path, filename:str="scales.json")->pd.DataFrame:
     """Scales the relevant features based on the directory structure using Min-Max scaling."""
     scaled_data = dataframe.copy()
     import json
@@ -61,7 +61,7 @@ def scale_normal(dataframe:pd.DataFrame, scale_dir:Path)->pd.DataFrame:
             "min":min_val,
         }
     # storing the scales as json file in scale_dir
-    scale_json_file = scale_dir / "scales.json"
+    scale_json_file = scale_dir / filename
     with open(scale_json_file, 'w', encoding='utf-8') as file:
         json.dump(scale_content, file, indent=4)
     return scaled_data

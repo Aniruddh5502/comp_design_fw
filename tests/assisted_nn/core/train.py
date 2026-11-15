@@ -73,45 +73,6 @@ class PrimaryTrainer:
                 total_loss += loss.item() * x_batch.size(0)
                 n_samples  += x_batch.size(0)
         return total_loss / max(n_samples, 1)
-    
-    def train(self, 
-              train_loader:DataLoader|None=None, 
-              val_loader:DataLoader|None=None):
-        
-        console.print(f"\n\n[{accent}]Training Starting.\n[/]")
-        
-        for epoch in range(1, self.epochs + 1):
-            train_loss = self.run_epoch(train_loader, train=True)
-            val_loss   = self.run_epoch(val_loader, train=False)
-            
-            self.train_loss.append(train_loss)
-            self.val_loss.append(val_loss)
-            
-            # save the best one
-            if val_loss < self.best_val_loss:
-                self.best_val_loss = val_loss
-                self.save_model()
-            
-            # printing
-            if epoch == 1 or epoch%10==0 or epoch == self.epochs:
-                self.console.print(f"[{accent}]Epoch: {epoch:4d}[/] | Train Loss {train_loss:.4f} | Validation Loss {val_loss:.4f}")
-        
-        self.console.print("\n\n")
-        self.console.print(f"[{another}][PRIMARY TRAINER][/] Best Val Loss        : {self.best_val_loss:.4f}")
-        self.console.print(f"[{another}][PRIMARY TRAINER][/] Best Model saved to  : {self.save_path}")
-        self.console.print("\n\n")
-        
-        # load the best weights back to the instance is in its best state
-        self.model.load_state_dict(torch.load(self.save_path, map_location=self.device))
-        
-        
-        return {
-            "status":True,
-            "content":{
-                "train_loss":self.train_loss,
-                "val_loss":self.val_loss,
-            }
-        }
 
     def plot(self, plots_folder:Path=plots_folder, savefig:bool=True):
         
@@ -146,8 +107,50 @@ class PrimaryTrainer:
         
         if savefig:
             plt.savefig(plots_folder / "Primary-Training-Loss.svg",bbox_inches='tight', pad_inches=0.25)
-     
 
+    def train(self, 
+              train_loader:DataLoader|None=None, 
+              val_loader:DataLoader|None=None, 
+              plot:bool=True):
+        
+        console.print(f"\n\n[{accent}]Training Starting.\n[/]")
+        
+        for epoch in range(1, self.epochs + 1):
+            train_loss = self.run_epoch(train_loader, train=True)
+            val_loss   = self.run_epoch(val_loader, train=False)
+            
+            self.train_loss.append(train_loss)
+            self.val_loss.append(val_loss)
+            
+            # save the best one
+            if val_loss < self.best_val_loss:
+                self.best_val_loss = val_loss
+                self.save_model()
+            
+            # printing
+            if epoch == 1 or epoch%10==0 or epoch == self.epochs:
+                self.console.print(f"[{accent}]Epoch: {epoch:4d}[/] | Train Loss {train_loss:.4f} | Validation Loss {val_loss:.4f}")
+        
+        self.console.print("\n\n")
+        self.console.print(f"[{another}][PRIMARY TRAINER][/] Best Val Loss        : {self.best_val_loss:.4f}")
+        self.console.print(f"[{another}][PRIMARY TRAINER][/] Best Model saved to  : {self.save_path}")
+        self.console.print("\n\n")
+        
+        # load the best weights back to the instance is in its best state
+        self.model.load_state_dict(torch.load(self.save_path, map_location=self.device))
+        
+        if plot:
+            self.plot()
+        
+        return {
+            "status":True,
+            "content":{
+                "train_loss":self.train_loss,
+                "val_loss":self.val_loss,
+            }
+        }
+
+     
 
 if __name__=="__main__":
     
@@ -163,8 +166,5 @@ if __name__=="__main__":
     train_dataloader = dataloaders["content"]["train"]
     val_dataloader   = dataloaders["content"]["val"]
     # now we train the primary
-    training_loss = primary_trainer.train(
-        train_loader=train_dataloader,
-        val_loader=val_dataloader)
-    plot = primary_trainer.plot()
+    primary_trainer.train(train_loader=train_dataloader, val_loader=val_dataloader, plot=True)
     

@@ -14,6 +14,7 @@ model_folder        =   assisted_nn_root / "model"
 
 # files for dataset, scalers etc
 dataset_raw_file    =   assisted_nn_root.parent.parent / "data" / "raw" / "inputs.csv"
+error_df_scale_file =   assisted_nn_root    /   "data"  /  "error_scales.json"
 
 # colors
 accent  = "#D97757"
