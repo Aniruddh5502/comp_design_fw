@@ -48,8 +48,8 @@ class ErrorMapper(nn.Module):
 if __name__=="__main__":
     # testing if the classes work
     try:
-        primary =Primary()
-        error_mapper = ErrorMapper()
+        _primary =Primary()
+        _error_mapper = ErrorMapper()
         print(f"Class Initialization Succesfull")
     except Exception as e:
         print(f"Error Occured: {e}")

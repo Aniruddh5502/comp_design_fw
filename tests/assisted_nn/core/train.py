@@ -142,6 +142,11 @@ class PrimaryTrainer:
         if plot:
             self.plot()
         
+        # --- per-target error report on train + val ---
+        console.print(f"\n[{accent}]Per-target error report (best weights)[/]\n")
+        TARGETS = ["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq",]
+        self.evaluate(train_loader, TARGETS, split_name="Train")
+        self.evaluate(val_loader,   TARGETS, split_name="Val  ")
         return {
             "status":True,
             "content":{
@@ -150,6 +155,59 @@ class PrimaryTrainer:
             }
         }
 
+    @torch.no_grad()
+    def evaluate(self, loader:DataLoader, target_names: list[str], split_name: str = "", model:Primary|None=None) -> dict:
+        """Compute per-target MAE, RMSE, nMAE on a dataloader."""
+        import numpy as np
+        import pandas as pd
+        if model is not None:
+            net = model
+        else:
+            net = self.model
+        
+        net.eval()
+        preds_all, true_all = [], []
+
+        for x_batch, y_batch in loader:
+            x_batch = x_batch.to(self.device)
+            preds_all.append(net(x_batch).cpu().numpy())
+            true_all.append(y_batch.numpy())
+
+        preds = np.concatenate(preds_all, axis=0)
+        y_true = np.concatenate(true_all, axis=0)
+
+        err = preds - y_true
+        abs_err = np.abs(err)
+
+        stats = {
+            "MAE":     abs_err.mean(axis=0),
+            "RMSE":    np.sqrt((err ** 2).mean(axis=0)),
+            "MeanErr": err.mean(axis=0),
+            "nMAE":    abs_err.mean(axis=0) / (y_true.std(axis=0) + 1e-12),
+        }
+
+        df = pd.DataFrame(stats, index=target_names).T
+
+        # baseline: always-predict-mean
+        baseline_mae = np.abs(y_true - y_true.mean(axis=0)).mean(axis=0)
+        df.loc["mean_baseline_MAE"] = baseline_mae
+        df.loc["model_MAE"]         = df.loc["MAE"]
+        df.loc["beats_baseline"]    = df.loc["MAE"] < baseline_mae
+
+        # pretty print
+        from rich.table import Table
+        table = Table(title=f"[{accent}]{split_name} Error Report[/]")
+        table.add_column("Metric", justify="left")
+        for t in target_names:
+            table.add_column(t, justify="right")
+
+        for metric in df.index:
+            row = [metric] + [f"{v:.4f}" for v in df.loc[metric].values]
+            table.add_row(*row)
+
+        self.console.print(table)
+
+        return {"preds": preds, "true": y_true, "df": df}
      
 
 if __name__=="__main__":

@@ -6,6 +6,11 @@
 - get_dataloaders dataframe seed 41 build_from_scratch False splits data into train error val test 50 30 10 10 using random permutation when build_from_scratch True otherwise loads pre existing CSVs train_df csv error_df csv val_df csv test_df csv Returns dict with keys status content error Inside content are the actual keys train error val test plus train_size error_size val_size test_size
 - Run from tests directory cd tests and python -m assisted_nn utils data_loader
 
+## Additional Data Prep Scripts (11/15/2026)
+- utils/error_data.py: generate_error_data_loader loads+cleans+scales error_df csv builds error dataloader returns dict with key error. generate_error_mapper_models_training_dataset loads primary.pt runs Primary over error split computes error field E = A - P builds DataFrame [features | targets | error_*] saves to data/error_mapper_training_data.csv returns DataFrame. Prints per-target correlation(actual_target, error_field).
+- core/train_error.py: ErrorMap class stub (NEEDS WORK). Instantiates ErrorMapper optimizer MSE loss. get_error_map() method not implemented. Intended to run primary model and send back error map csv data. Not wired into README pipeline.
+- Artifacts: data/error_mapper_training_data.csv (11/15), data/error_scales.json (11/15).
+
 ## Code Review Findings
 - Optimizer gradient gating etc confirmed correct
 
@@ -125,22 +130,48 @@ Already defined
 
 - Primary Trainer (core/train.py) Implemented and verified end to end Saved model primary pt plotted loss
 - ErrorMapper Trainer Implemented via run error mapper py Will train ErrorMapper on error map split evaluate on test set
+- Error Data Prep (utils/error_data.py 11/15) Implemented generate_error_mapper_models_training_dataset loads primary.pt runs predictions computes error field saves data/error_mapper_training_data.csv prints per-target correlation
+- ErrorMap class (core/train_error.py 11/15) Stub NEEDS WORK get_error_map not implemented not wired into pipeline
 - Next Run ErrorMapperTrainer compute correlation Pearson Spearman RMSE MAE on test set validate structural error trend mapping onto design space
 
 ## 10 Files Folders
 
 - core models py Primary (predictor NN) and ErrorMapper (error mapper NN) classes
+- core train py PrimaryTrainer implementation
+- core trainer_errormapper py ErrorMapperTrainer implementation
+- core train_error py ErrorMap class stub (NEEDS WORK)
 - utils data_loader py Data loading cleaning scaling dataloader creation
 - utils config py Path constants (dataset_raw_file data_folder plots_folder colors)
+- utils error_data py Error data generation pipeline (generate_error_data_loader generate_error_mapper_models_training_dataset)
 - data raw inputs csv Raw FEM dataset
 - data train_df csv error_df csv val_df csv test_df csv
-- data scales json Min Max scale params per column
+- data scales json error_scales.json Min Max scale params per column
+- data error_mapper_training_data.csv (11/15 generated)
 - model primary pt error mapper pt (outputs)
 - plots Primary Training Loss svg ErrorMapper Training Loss svg (plots)
 - run error mapper py End to end runner for ErrorMapperTrainer
 
-## 11 Last Updated 11/14/2026
+## 11 Last Updated 11/15/2026
 - Data loading pipeline implemented and verified
 - Primary Trainer implemented and verified end to end
 - ErrorMapper trainer implemented via run error mapper py
-- README md updated added run error mapper py command clarified get_dataloaders output keys removed placeholder usage
+- Error data prep pipeline (utils/error_data.py) implemented generate_error_mapper_models_training_dataset saves error_mapper_training_data.csv
+- README md updated added error_data.py and train_error.py files clarified get_dataloaders output keys removed placeholder usage
+
+# Files
+## tests/assisted_nn/core/train.py
+Trains the primary model, evaluates it on train and validation data, generates plot saves plot in plots/ folder and prints out the details.
+## tests/assisted_nn/core/
+
+# Work Progress
+## STEP 1: Primary model training
+Data preperation is almost direct in this case of primary model. First the dataset is cleaned and made to train, val, error, test dataloaders and saved as CSV. Primary model is trained on the train_df.csv dataset features and targets. And tracked with validation set to ensure its not overfitting on the training data. Plot saved in tests/assisted_nn/plots/ folder.
+
+## STEP 2: Data Preparation
+For ErrorMapper() class models data preperation, first doing inference with the error_df.csv using the Primary() model class. Then remarking the target columns with error word to identify that these are prediction errors computed from the error dataset. Now the tests/assisted_nn/utils/error_data.py returns training and validation data unscaled relative to the Primary mdoels data, but scaled normally compared to raw dataset.
+
+## STEP 3: Error Mapper Training
+[pending]
+
+## STEP 4: Correlation Study
+[pending]
