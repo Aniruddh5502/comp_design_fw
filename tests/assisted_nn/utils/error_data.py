@@ -28,7 +28,7 @@ val_df_csv  =   data_folder / "val_df.csv"
 model_weights_path = model_folder / 'primary.pt'
 
 def get_error_data(error_csv_file: Path = error_df_csv,
-                   val_csv_file: Path = val_df_csv) -> pd.DataFrame:
+                   val_csv_file: Path = val_df_csv) -> dict:
     
     features = ["beam_width", "beam_length", "fillet_radius", "beam_height"]
     targets  = ["max_stress_von_mises", "max_deformation",
@@ -107,11 +107,48 @@ def get_error_data(error_csv_file: Path = error_df_csv,
         "train":combined_error_df,
         "val":combined_error_val_df,
     }
+
+def get_error_dataloaders(error_csv_file: Path = error_df_csv,
+                   val_csv_file: Path = val_df_csv):
+    """
+    This function uses the get_error_data function to get the 
+    error_mapper_train and error_mapper_val dataframes and then
+    makes dataloaders from them
+    """
+    # get error dataframes
+    dataframes = get_error_data()
+    
+    train_df = dataframes['train']
+    val_df   = dataframes['val']
+    
+    features = ['beam_width', 'beam_length', 'fillet_radius', 'beam_height']
+    targets = ['max_stress_von_mises_error', 'max_deformation_error', 'mode_1_freq_error', 'mode_2_freq_error', 'mode_3_freq_error', 'mode_4_freq_error']
+    
+    # Now make tensors from these dataframes-> numpy values using .values
+    train_features_t    =   torch.tensor(train_df[features].values, dtype=torch.float32)
+    train_targets_t     =   torch.tensor(train_df[targets].values, dtype=torch.float32)
+    val_features_t      =   torch.tensor(val_df[features].values, dtype=torch.float32)
+    val_targets_t       =   torch.tensor(val_df[targets].values, dtype=torch.float32)
+    
+    # making tensor datasets
+    train_t             =   TensorDataset(train_features_t, train_targets_t)
+    val_t               =   TensorDataset(val_features_t, val_targets_t)
+    
+    # making dataloaders
+    train_dl            =   DataLoader(train_t, batch_size=32, shuffle=True)
+    val_dl              =   DataLoader(val_t, batch_size=32, shuffle=True)
+    
+    # now we return the dataloaders as a dict
+    return {
+        "train":train_dl,
+        "val":val_dl
+    }
+    
     
 if __name__=="__main__":
-    
-    print(f"\n\nTraining Data for error mapper:\n")
-    print(get_error_data()["train"].describe())
-    
-    print(f"\n\nValidation Data for error mapper:\n")
-    print(get_error_data()["val"].describe())
+    print(f"ErrorMapper models training data details: ")
+    print(f"ErrorMapper models training data columns")
+    print(f"{get_error_data()['val'].columns}")
+    dataloaders = get_error_dataloaders()
+    print(f"ErrorMapper models training and validation data descriptions:")
+    print(f"{dataloaders}")
