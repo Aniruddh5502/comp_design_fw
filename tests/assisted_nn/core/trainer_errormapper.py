@@ -14,7 +14,6 @@ from rich.console import Console
 from assisted_nn.core.models import ErrorMapper
 from assisted_nn.utils.config import data_folder, model_folder, plots_folder
 from assisted_nn.utils.config import accent, focus, success, another
-from assisted_nn.utils.error_data import 
 
 console = Console()
 
