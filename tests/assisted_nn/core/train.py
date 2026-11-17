@@ -23,7 +23,7 @@ class PrimaryTrainer:
     """Trains the primary model on the train split, validates on val split"""
     def __init__(self,
                  learning_rate:float=1e-3,
-                 epochs:int=100,
+                 epochs:int=5,
                  device:str="cpu",
                  seed:int=41,
                  save_path:Path|None=None):
@@ -100,8 +100,8 @@ class PrimaryTrainer:
         ax.set_title("Primary Models Training & Validation Loss")
         ax.set_xlabel("Epochs")
         ax.set_ylabel("Loss (MSE)")
-        ax.plot(range(self.epochs), self.train_loss, label="Training Loss")
-        ax.plot(range(self.epochs), self.val_loss, label="Validation Loss")
+        ax.plot(range(self.epochs), self.train_loss, label="Training Loss", marker='o', markersize=15, markerfacecolor='#56B4E9', markeredgecolor='black')
+        ax.plot(range(self.epochs), self.val_loss, label="Validation Loss", marker='o', markersize=15, markerfacecolor='#009E73', markeredgecolor='black')
         ax.legend(loc='upper right', frameon=True)
         ax.grid(alpha=0.8)
         
