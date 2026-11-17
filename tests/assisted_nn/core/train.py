@@ -170,6 +170,7 @@ class PrimaryTrainer:
 
         for x_batch, y_batch in loader:
             x_batch = x_batch.to(self.device)
+            y_batch = y_batch.to(self.device)
             preds_all.append(net(x_batch).cpu().numpy())
             true_all.append(y_batch.numpy())
 
