@@ -158,7 +158,7 @@ class ErrorMapperTrainer:
         }
 
     @torch.no_grad()
-    def evaluate(self, loader:DataLoader, target_names: list[str], split_name: str = "", model:Primary|None=None) -> dict:
+    def evaluate(self, loader:DataLoader, target_names: list[str], split_name: str = "", model:ErrorMapper|None=None) -> dict:
         """Compute per-target MAE, RMSE, nMAE on a dataloader."""
         import numpy as np
         import pandas as pd
