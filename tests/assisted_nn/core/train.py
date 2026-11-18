@@ -227,4 +227,4 @@ if __name__=="__main__":
     val_dataloader   = dataloaders["content"]["val"]
     # now we train the primary
     primary_trainer.train(train_loader=train_dataloader, val_loader=val_dataloader, plot=True)
-    
+    primary_trainer.evaluate(loader=val_dataloader, target_names=["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq",])
