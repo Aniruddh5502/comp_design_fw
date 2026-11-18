@@ -99,8 +99,8 @@ class ErrorMapperTrainer:
             ax.set_title("Error Mapper Models Training and Validation Loss")
             ax.set_xlabel("Epochs")
             ax.set_ylabel("Loss(MSE)")
-            ax.plot(range(self.epochs), self.train_loss, label="Training Loss", marker='o', markersize=15, markerfacecolor='#56B4E9', markeredgecolor='black')
-            ax.plot(range(self.epochs), self.val_loss, label="Validation Loss", marker='o', markersize=15, markerfacecolor='#009E73', markeredgecolor='black')
+            ax.plot(range(self.epochs), self.train_loss, color='#56B4E9', label="Training Loss", marker='o', markersize=15, markerfacecolor='#56B4E9', markeredgecolor='black')
+            ax.plot(range(self.epochs), self.val_loss, color='#009E73', label="Validation Loss", marker='o', markersize=15, markerfacecolor='#009E73', markeredgecolor='black')
             ax.legend(loc='upper right', frameon=True)
             ax.grid(alpha=0.8)
             
