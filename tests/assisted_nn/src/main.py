@@ -129,7 +129,7 @@ def get_predicted_error_df(test_dataloaders:DataLoader,
     pred = np.concatenate(predictions, axis=0)
     y_true_all = np.concatenate(y_true, axis=0)
     pred_df = pd.DataFrame(pred, columns=[f"{t}_error" for t in targets])
-    print(pred_df.describe())
+    return pred_df
 
 
 def correlation_analysis(true_error:pd.DataFrame, 
@@ -137,6 +137,14 @@ def correlation_analysis(true_error:pd.DataFrame,
     """
     This function takes two error df prediction and comp
     """
+    target_columns = []
+    for column in true_error.columns:
+        target_columns.append(column)
+        pearson_correlation = true_error[f'{(column)}'].corr(pred_error[f"{column}"], method="pearson")
+        spearman_correlation= true_error[f"{column}"].corr(pred_error[f"{column}"], method="spearman")
+        console.print(f"\n[bold {accent}]Column: [/][bold]{column}[/]")
+        console.print(f"1. Pearson Correlation  : {pearson_correlation}")
+        console.print(f"2. Spearman Correlation : {spearman_correlation}")
     pass
 
 if __name__=="__main__":
@@ -164,3 +172,7 @@ if __name__=="__main__":
         console.print(f"[{accent}]Test 3:[/]    [{success}]Error Mapper models prediction succesfull")
     else:
         console.print(f"[{accent}]Test 3:[/]    [{focus}]Error Mapper model prediction failed.")
+        
+    # now the correlation analysis
+    correlation_result = correlation_analysis(actual_error_df, pred_error_df)
+    

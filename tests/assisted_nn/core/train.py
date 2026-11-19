@@ -22,8 +22,8 @@ console = Console()
 class PrimaryTrainer:
     """Trains the primary model on the train split, validates on val split"""
     def __init__(self,
-                 learning_rate:float=1e-3,
-                 epochs:int=5,
+                 learning_rate:float=1e-4,
+                 epochs:int=4,
                  device:str="cpu",
                  seed:int=41,
                  save_path:Path|None=None):

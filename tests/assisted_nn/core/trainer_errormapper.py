@@ -23,7 +23,7 @@ class ErrorMapperTrainer:
     """
     def __init__(self,
                  learning_rate:float=1e-3,
-                 epochs:int=5,
+                 epochs:int=10,
                  device:str="cpu",
                  seed:int=41,
                  save_path:Path|None=None):
@@ -224,7 +224,7 @@ if __name__=="__main__":
     train_loader = loaders["train"]
     val_loader   = loaders["val"]
     
-    trainer = ErrorMapperTrainer(epochs=100)
+    trainer = ErrorMapperTrainer(learning_rate=0.001, epochs=20)
     trainer.train(train_loader=train_loader, val_loader=val_loader, plot=True)
     trainer.evaluate(loader=val_loader, target_names=["max_stress_von_mises", "max_deformation", "mode_1_freq", "mode_2_freq", "mode_3_freq", "mode_4_freq"])
     
